@@ -58,4 +58,11 @@
 
 <BlockQuote>    ::= > <Inline> | > <Inline> \n <BlockQuote>
 
+<UnOrderedList> ::= <UnOrderedListItem> | <UnOrderedListItem> \n <UnOrderedListItem>
+<UnOrderedListItem> ::= * <Inline> | - <Inline>
+
+<OrderedList> ::= <OrderedListItem> | <OrderedListItem> \n <OrderedListItem>
+<OrderedListItem> ::= <Integer> <Inline> | <Integer> <Inline>
+
+
 ```
