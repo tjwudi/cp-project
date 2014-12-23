@@ -1,0 +1,141 @@
+Created by PLY version 3.4 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> article
+Rule 1     article -> article block
+Rule 2     article -> <empty>
+Rule 3     block -> h1
+Rule 4     block -> h2
+Rule 5     inline -> PLAIN
+Rule 6     h1 -> H1OPEN inline H1CLOSE
+Rule 7     h2 -> H2OPEN PLAIN H2CLOSE
+
+Terminals, with rules where they appear
+
+H1CLOSE              : 6
+H1OPEN               : 6
+H2CLOSE              : 7
+H2OPEN               : 7
+PLAIN                : 5 7
+error                : 
+
+Nonterminals, with rules where they appear
+
+article              : 1 0
+block                : 1
+h1                   : 3
+h2                   : 4
+inline               : 6
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . article
+    (1) article -> . article block
+    (2) article -> .
+
+    H1OPEN          reduce using rule 2 (article -> .)
+    H2OPEN          reduce using rule 2 (article -> .)
+    $end            reduce using rule 2 (article -> .)
+
+    article                        shift and go to state 1
+
+state 1
+
+    (0) S' -> article .
+    (1) article -> article . block
+    (3) block -> . h1
+    (4) block -> . h2
+    (6) h1 -> . H1OPEN inline H1CLOSE
+    (7) h2 -> . H2OPEN PLAIN H2CLOSE
+
+    H1OPEN          shift and go to state 2
+    H2OPEN          shift and go to state 4
+
+    h2                             shift and go to state 3
+    h1                             shift and go to state 5
+    block                          shift and go to state 6
+
+state 2
+
+    (6) h1 -> H1OPEN . inline H1CLOSE
+    (5) inline -> . PLAIN
+
+    PLAIN           shift and go to state 8
+
+    inline                         shift and go to state 7
+
+state 3
+
+    (4) block -> h2 .
+
+    H1OPEN          reduce using rule 4 (block -> h2 .)
+    H2OPEN          reduce using rule 4 (block -> h2 .)
+    $end            reduce using rule 4 (block -> h2 .)
+
+
+state 4
+
+    (7) h2 -> H2OPEN . PLAIN H2CLOSE
+
+    PLAIN           shift and go to state 9
+
+
+state 5
+
+    (3) block -> h1 .
+
+    H1OPEN          reduce using rule 3 (block -> h1 .)
+    H2OPEN          reduce using rule 3 (block -> h1 .)
+    $end            reduce using rule 3 (block -> h1 .)
+
+
+state 6
+
+    (1) article -> article block .
+
+    H1OPEN          reduce using rule 1 (article -> article block .)
+    H2OPEN          reduce using rule 1 (article -> article block .)
+    $end            reduce using rule 1 (article -> article block .)
+
+
+state 7
+
+    (6) h1 -> H1OPEN inline . H1CLOSE
+
+    H1CLOSE         shift and go to state 10
+
+
+state 8
+
+    (5) inline -> PLAIN .
+
+    H1CLOSE         reduce using rule 5 (inline -> PLAIN .)
+
+
+state 9
+
+    (7) h2 -> H2OPEN PLAIN . H2CLOSE
+
+    H2CLOSE         shift and go to state 11
+
+
+state 10
+
+    (6) h1 -> H1OPEN inline H1CLOSE .
+
+    H1OPEN          reduce using rule 6 (h1 -> H1OPEN inline H1CLOSE .)
+    H2OPEN          reduce using rule 6 (h1 -> H1OPEN inline H1CLOSE .)
+    $end            reduce using rule 6 (h1 -> H1OPEN inline H1CLOSE .)
+
+
+state 11
+
+    (7) h2 -> H2OPEN PLAIN H2CLOSE .
+
+    H1OPEN          reduce using rule 7 (h2 -> H2OPEN PLAIN H2CLOSE .)
+    H2OPEN          reduce using rule 7 (h2 -> H2OPEN PLAIN H2CLOSE .)
+    $end            reduce using rule 7 (h2 -> H2OPEN PLAIN H2CLOSE .)
+
