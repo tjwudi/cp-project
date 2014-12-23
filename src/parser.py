@@ -29,9 +29,18 @@ def p_block(p):
         | hr
         | block-list
         | paragraph
+        | blockquote
+        | blockcode
   '''
   p[0] = p[1]
 
+
+#
+# blockcode
+#
+def p_blockcode(p):
+  'blockcode : BLOCKCODEOPEN PLAIN BLOCKCODECLOSE'
+  p[0] = '<pre><code>%s</code></pre>' % p[2]
 
 #
 # paragraph
@@ -39,6 +48,30 @@ def p_block(p):
 def p_paragraph(p):
   'paragraph : inline'
   p[0] = '<p>%s</p>' % p[1]
+
+#
+# blockquote
+#
+def p_blockquote(p):
+    'blockquote : quotelines'
+    p[0] = '<blockquote>%s</blockquote>' % p[1]
+
+def p_quotelines(p):
+    '''
+    quotelines : quoteline quotelines
+               | BLOCKDIV
+    '''
+    if len(p) > 2:
+        p[0] = p[1] + '<br>' + p[2]
+    else:
+        p[0] = ''
+
+def p_quoteline(p):
+    '''
+    quoteline : QUOTELINE inline NEWL
+               | QUOTELINE inline
+    '''
+    p[0] = p[2]
 
 #
 # list
@@ -75,6 +108,7 @@ def p_inline(p):
          | inline inline-code
          | inline named-link
          | inline auto-link
+         | inline image
   '''
   p[0] = p[1] + p[2]
 
@@ -123,7 +157,7 @@ def p_strong(p):
 # italic
 #
 def p_italic(p):
-  'italic : ITALICOPEN PLAIN ITALICCLOSE'
+  'italic : ITALICOPEN inline ITALICCLOSE'
   p[0] = '<i>%s</i>' % p[2]
 
 #
@@ -132,6 +166,13 @@ def p_italic(p):
 def p_named_link(p):
   'named-link : LSBRC PLAIN RSBRC LBRC PLAIN RBRC'
   p[0] = '<a href="%s">%s</a>' % (p[5], p[2])
+
+#
+# image
+#
+def p_image(p):
+  'image : QLSBRC PLAIN RSBRC LBRC PLAIN RBRC'
+  p[0] = '<img src="%s"></img>' % p[5]
 
 #
 # auto link
@@ -144,7 +185,7 @@ def p_auto_link(p):
 # inline code
 #
 def p_inline_code(p):
-  'inline-code : ICOPEN PLAIN ICCLOSE'
+  'inline-code : ICOPEN inline ICCLOSE'
   p[0] = '<code>%s</code>' % p[2]
 
 #

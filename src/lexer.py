@@ -20,9 +20,14 @@ tokens = (
     'ITALICCLOSE',
     'LBRC',
     'RBRC',
+    'QLSBRC',
     'LSBRC',
     'RSBRC',
     'LI',
+    'QUOTELINE',
+    'BLOCKCODEOPEN',
+    'BLOCKCODECLOSE',
+    'NEWL',
     )
 
 states = (
@@ -31,11 +36,14 @@ states = (
         ('h3', 'exclusive'),
         ('hr', 'exclusive'),
         ('inline', 'exclusive'),
+        ('blockcode', 'exclusive'),
+        ('autolink', 'exclusive'),
         )
 
 t_LBRC = r'\('
 t_RBRC = r'\)'
 t_LSBRC = r'\['
+t_QLSBRC = r'\!\['
 t_RSBRC = r'\]'
 
 # hr
@@ -43,13 +51,33 @@ def t_HR(t):
   r'===\n|\-\-\-\n|\*\ \*\ \*\n'
   return t
 
+# blockquote
+def t_BLOCKCODEOPEN(t):
+  r'```\n'
+  t.lexer.push_state('blockcode')
+  return t
+
+def t_blockcode_PLAIN(t):
+  r'[^`]+'
+  return t
+
+def t_blockcode_BLOCKCODECLOSE(t):
+  r'```\n'
+  t.lexer.pop_state()
+  return t
+
 # LI
 def t_LI(t):
   r'(\*|\d+|\+)\.? ([a-zA-Z0-9\.\, ]+)\n'
-  t.value = ( t.lexer.lexmatch.groups()[2], t.lexer.lexmatch.groups()[3] )
+  t.value = ( t.lexer.lexmatch.group(4), t.lexer.lexmatch.group(5) )
   return t
 
-
+# BlockQuote Line
+def t_QUOTELINE(t):
+  r'\> '
+  t.value = t.lexer.lexmatch.groups()[5].lstrip()
+  print t.lexer.lexmatch.group()
+  return t
 
 # strong
 def t_STRONG(t):
@@ -92,15 +120,21 @@ def t_IC(t):
   return t
 
 # auto line - AL
-def t_AL(t):
-  r'(\<|\>)'
+def t_ALOPEN(t):
+  r'\<'
+  t.type = 'ALOPEN'
+  t.lexer.inline_stack.append('auto-link')
+  t.lexer.push_state('autolink')
+  return t
+
+def t_autolink_ALCLOSE(t):
+  r'\>'
   if len(t.lexer.inline_stack) > 0 and t.lexer.inline_stack[-1] == 'auto-link':
     t.type = 'ALCLOSE'
-    t.lexer.inline_stack.pop()
-  else:
-    t.type = 'ALOPEN'
+    t.lexer.pop_state()
     t.lexer.inline_stack.append('auto-link')
   return t
+
 
 # h3 
 def t_H3OPEN(t):
@@ -137,14 +171,23 @@ def t_h1_H1CLOSE(t):
   return t
 
 # ANY
+# plain text with new line at the ent
+
 def t_ANY_PLAIN(t):
   r'[\/a-zA-Z0-9\,\.\' \:]+'
   return t
 
 # empty lines
-def t_BLOCKDIV(t):
-  r'(\n|\t)+'
+def t_NEWL(t):
+  r'\n\>'
+  t.lexer.lexpos -= 1
   return t
+
+
+def t_BLOCKDIV(t):
+  r'[\n\t]+'
+  return t
+
 
 
 # Error handling

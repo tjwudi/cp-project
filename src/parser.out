@@ -12,72 +12,92 @@ Rule 6     block -> h3
 Rule 7     block -> hr
 Rule 8     block -> block-list
 Rule 9     block -> paragraph
-Rule 10    paragraph -> inline
-Rule 11    block-list -> list-items
-Rule 12    list-items -> list-item list-items
-Rule 13    list-items -> BLOCKDIV
-Rule 14    list-item -> LI
-Rule 15    inline -> inline PLAIN
-Rule 16    inline -> inline strong
-Rule 17    inline -> inline italic
-Rule 18    inline -> inline inline-code
-Rule 19    inline -> inline named-link
-Rule 20    inline -> inline auto-link
-Rule 21    inline -> <empty>
-Rule 22    h1 -> H1OPEN PLAIN H1CLOSE
-Rule 23    h2 -> H2OPEN PLAIN H2CLOSE
-Rule 24    h3 -> H3OPEN PLAIN H3CLOSE
-Rule 25    hr -> HR
-Rule 26    strong -> STRONGOPEN inline STRONGCLOSE
-Rule 27    italic -> ITALICOPEN PLAIN ITALICCLOSE
-Rule 28    named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC
-Rule 29    auto-link -> ALOPEN PLAIN ALCLOSE
-Rule 30    inline-code -> ICOPEN PLAIN ICCLOSE
+Rule 10    block -> blockquote
+Rule 11    block -> blockcode
+Rule 12    blockcode -> BLOCKCODEOPEN PLAIN BLOCKCODECLOSE
+Rule 13    paragraph -> inline
+Rule 14    blockquote -> quotelines
+Rule 15    quotelines -> quoteline quotelines
+Rule 16    quotelines -> BLOCKDIV
+Rule 17    quoteline -> QUOTELINE inline NEWL
+Rule 18    quoteline -> QUOTELINE inline
+Rule 19    block-list -> list-items
+Rule 20    list-items -> list-item list-items
+Rule 21    list-items -> BLOCKDIV
+Rule 22    list-item -> LI
+Rule 23    inline -> inline PLAIN
+Rule 24    inline -> inline strong
+Rule 25    inline -> inline italic
+Rule 26    inline -> inline inline-code
+Rule 27    inline -> inline named-link
+Rule 28    inline -> inline auto-link
+Rule 29    inline -> inline image
+Rule 30    inline -> <empty>
+Rule 31    h1 -> H1OPEN PLAIN H1CLOSE
+Rule 32    h2 -> H2OPEN PLAIN H2CLOSE
+Rule 33    h3 -> H3OPEN PLAIN H3CLOSE
+Rule 34    hr -> HR
+Rule 35    strong -> STRONGOPEN inline STRONGCLOSE
+Rule 36    italic -> ITALICOPEN inline ITALICCLOSE
+Rule 37    named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC
+Rule 38    image -> QLSBRC PLAIN RSBRC LBRC PLAIN RBRC
+Rule 39    auto-link -> ALOPEN PLAIN ALCLOSE
+Rule 40    inline-code -> ICOPEN inline ICCLOSE
 
 Terminals, with rules where they appear
 
-ALCLOSE              : 29
-ALOPEN               : 29
-BLOCKDIV             : 3 13
-H1CLOSE              : 22
-H1OPEN               : 22
-H2CLOSE              : 23
-H2OPEN               : 23
-H3CLOSE              : 24
-H3OPEN               : 24
-HR                   : 25
-ICCLOSE              : 30
-ICOPEN               : 30
-ITALICCLOSE          : 27
-ITALICOPEN           : 27
-LBRC                 : 28
-LI                   : 14
-LSBRC                : 28
-PLAIN                : 15 22 23 24 27 28 28 29 30
-RBRC                 : 28
-RSBRC                : 28
-STRONGCLOSE          : 26
-STRONGOPEN           : 26
+ALCLOSE              : 39
+ALOPEN               : 39
+BLOCKCODECLOSE       : 12
+BLOCKCODEOPEN        : 12
+BLOCKDIV             : 3 16 21
+H1CLOSE              : 31
+H1OPEN               : 31
+H2CLOSE              : 32
+H2OPEN               : 32
+H3CLOSE              : 33
+H3OPEN               : 33
+HR                   : 34
+ICCLOSE              : 40
+ICOPEN               : 40
+ITALICCLOSE          : 36
+ITALICOPEN           : 36
+LBRC                 : 37 38
+LI                   : 22
+LSBRC                : 37
+NEWL                 : 17
+PLAIN                : 12 23 31 32 33 37 37 38 38 39
+QLSBRC               : 38
+QUOTELINE            : 17 18
+RBRC                 : 37 38
+RSBRC                : 37 38
+STRONGCLOSE          : 35
+STRONGOPEN           : 35
 error                : 
 
 Nonterminals, with rules where they appear
 
 article              : 1 0
-auto-link            : 20
+auto-link            : 28
 block                : 1
 block-list           : 8
+blockcode            : 11
+blockquote           : 10
 h1                   : 4
 h2                   : 5
 h3                   : 6
 hr                   : 7
-inline               : 10 15 16 17 18 19 20 26
-inline-code          : 18
-italic               : 17
-list-item            : 12
-list-items           : 11 12
-named-link           : 19
+image                : 29
+inline               : 13 17 18 23 24 25 26 27 28 29 35 36 40
+inline-code          : 26
+italic               : 25
+list-item            : 20
+list-items           : 19 20
+named-link           : 27
 paragraph            : 9
-strong               : 16
+quoteline            : 15
+quotelines           : 14 15
+strong               : 24
 
 Parsing method: LALR
 
@@ -93,63 +113,83 @@ state 0
     (7) block -> . hr
     (8) block -> . block-list
     (9) block -> . paragraph
-    (22) h1 -> . H1OPEN PLAIN H1CLOSE
-    (23) h2 -> . H2OPEN PLAIN H2CLOSE
-    (24) h3 -> . H3OPEN PLAIN H3CLOSE
-    (25) hr -> . HR
-    (11) block-list -> . list-items
-    (10) paragraph -> . inline
-    (12) list-items -> . list-item list-items
-    (13) list-items -> . BLOCKDIV
-    (15) inline -> . inline PLAIN
-    (16) inline -> . inline strong
-    (17) inline -> . inline italic
-    (18) inline -> . inline inline-code
-    (19) inline -> . inline named-link
-    (20) inline -> . inline auto-link
-    (21) inline -> .
-    (14) list-item -> . LI
+    (10) block -> . blockquote
+    (11) block -> . blockcode
+    (31) h1 -> . H1OPEN PLAIN H1CLOSE
+    (32) h2 -> . H2OPEN PLAIN H2CLOSE
+    (33) h3 -> . H3OPEN PLAIN H3CLOSE
+    (34) hr -> . HR
+    (19) block-list -> . list-items
+    (13) paragraph -> . inline
+    (14) blockquote -> . quotelines
+    (12) blockcode -> . BLOCKCODEOPEN PLAIN BLOCKCODECLOSE
+    (20) list-items -> . list-item list-items
+    (21) list-items -> . BLOCKDIV
+    (23) inline -> . inline PLAIN
+    (24) inline -> . inline strong
+    (25) inline -> . inline italic
+    (26) inline -> . inline inline-code
+    (27) inline -> . inline named-link
+    (28) inline -> . inline auto-link
+    (29) inline -> . inline image
+    (30) inline -> .
+    (15) quotelines -> . quoteline quotelines
+    (16) quotelines -> . BLOCKDIV
+    (22) list-item -> . LI
+    (17) quoteline -> . QUOTELINE inline NEWL
+    (18) quoteline -> . QUOTELINE inline
 
   ! shift/reduce conflict for BLOCKDIV resolved as shift
   ! shift/reduce conflict for H1OPEN resolved as shift
   ! shift/reduce conflict for H2OPEN resolved as shift
   ! shift/reduce conflict for H3OPEN resolved as shift
   ! shift/reduce conflict for HR resolved as shift
+  ! shift/reduce conflict for BLOCKCODEOPEN resolved as shift
   ! reduce/reduce conflict for $end resolved using rule 2 (article -> .)
   ! shift/reduce conflict for LI resolved as shift
+  ! shift/reduce conflict for QUOTELINE resolved as shift
     $end            reduce using rule 2 (article -> .)
-    BLOCKDIV        shift and go to state 9
-    H1OPEN          shift and go to state 14
-    H2OPEN          shift and go to state 5
-    H3OPEN          shift and go to state 11
-    HR              shift and go to state 8
-    PLAIN           reduce using rule 21 (inline -> .)
-    STRONGOPEN      reduce using rule 21 (inline -> .)
-    ITALICOPEN      reduce using rule 21 (inline -> .)
-    ICOPEN          reduce using rule 21 (inline -> .)
-    LSBRC           reduce using rule 21 (inline -> .)
-    ALOPEN          reduce using rule 21 (inline -> .)
-    LI              shift and go to state 7
+    BLOCKDIV        shift and go to state 12
+    H1OPEN          shift and go to state 19
+    H2OPEN          shift and go to state 7
+    H3OPEN          shift and go to state 15
+    HR              shift and go to state 10
+    BLOCKCODEOPEN   shift and go to state 20
+    PLAIN           reduce using rule 30 (inline -> .)
+    STRONGOPEN      reduce using rule 30 (inline -> .)
+    ITALICOPEN      reduce using rule 30 (inline -> .)
+    ICOPEN          reduce using rule 30 (inline -> .)
+    LSBRC           reduce using rule 30 (inline -> .)
+    ALOPEN          reduce using rule 30 (inline -> .)
+    QLSBRC          reduce using rule 30 (inline -> .)
+    LI              shift and go to state 9
+    QUOTELINE       shift and go to state 11
 
-  ! BLOCKDIV        [ reduce using rule 21 (inline -> .) ]
-  ! H1OPEN          [ reduce using rule 21 (inline -> .) ]
-  ! H2OPEN          [ reduce using rule 21 (inline -> .) ]
-  ! H3OPEN          [ reduce using rule 21 (inline -> .) ]
-  ! HR              [ reduce using rule 21 (inline -> .) ]
-  ! LI              [ reduce using rule 21 (inline -> .) ]
-  ! $end            [ reduce using rule 21 (inline -> .) ]
+  ! BLOCKDIV        [ reduce using rule 30 (inline -> .) ]
+  ! H1OPEN          [ reduce using rule 30 (inline -> .) ]
+  ! H2OPEN          [ reduce using rule 30 (inline -> .) ]
+  ! H3OPEN          [ reduce using rule 30 (inline -> .) ]
+  ! HR              [ reduce using rule 30 (inline -> .) ]
+  ! BLOCKCODEOPEN   [ reduce using rule 30 (inline -> .) ]
+  ! LI              [ reduce using rule 30 (inline -> .) ]
+  ! QUOTELINE       [ reduce using rule 30 (inline -> .) ]
+  ! $end            [ reduce using rule 30 (inline -> .) ]
 
-    list-items                     shift and go to state 4
+    blockcode                      shift and go to state 18
+    blockquote                     shift and go to state 13
+    list-items                     shift and go to state 5
     h2                             shift and go to state 1
     h3                             shift and go to state 2
     h1                             shift and go to state 3
-    block-list                     shift and go to state 6
-    hr                             shift and go to state 10
-    paragraph                      shift and go to state 16
-    inline                         shift and go to state 12
-    article                        shift and go to state 13
-    block                          shift and go to state 17
-    list-item                      shift and go to state 15
+    block-list                     shift and go to state 8
+    quotelines                     shift and go to state 4
+    hr                             shift and go to state 14
+    paragraph                      shift and go to state 22
+    inline                         shift and go to state 16
+    article                        shift and go to state 17
+    quoteline                      shift and go to state 6
+    block                          shift and go to state 23
+    list-item                      shift and go to state 21
 
 state 1
 
@@ -160,13 +200,16 @@ state 1
     H2OPEN          reduce using rule 5 (block -> h2 .)
     H3OPEN          reduce using rule 5 (block -> h2 .)
     HR              reduce using rule 5 (block -> h2 .)
+    BLOCKCODEOPEN   reduce using rule 5 (block -> h2 .)
     LI              reduce using rule 5 (block -> h2 .)
+    QUOTELINE       reduce using rule 5 (block -> h2 .)
     PLAIN           reduce using rule 5 (block -> h2 .)
     STRONGOPEN      reduce using rule 5 (block -> h2 .)
     ITALICOPEN      reduce using rule 5 (block -> h2 .)
     ICOPEN          reduce using rule 5 (block -> h2 .)
     LSBRC           reduce using rule 5 (block -> h2 .)
     ALOPEN          reduce using rule 5 (block -> h2 .)
+    QLSBRC          reduce using rule 5 (block -> h2 .)
     $end            reduce using rule 5 (block -> h2 .)
 
 
@@ -179,13 +222,16 @@ state 2
     H2OPEN          reduce using rule 6 (block -> h3 .)
     H3OPEN          reduce using rule 6 (block -> h3 .)
     HR              reduce using rule 6 (block -> h3 .)
+    BLOCKCODEOPEN   reduce using rule 6 (block -> h3 .)
     LI              reduce using rule 6 (block -> h3 .)
+    QUOTELINE       reduce using rule 6 (block -> h3 .)
     PLAIN           reduce using rule 6 (block -> h3 .)
     STRONGOPEN      reduce using rule 6 (block -> h3 .)
     ITALICOPEN      reduce using rule 6 (block -> h3 .)
     ICOPEN          reduce using rule 6 (block -> h3 .)
     LSBRC           reduce using rule 6 (block -> h3 .)
     ALOPEN          reduce using rule 6 (block -> h3 .)
+    QLSBRC          reduce using rule 6 (block -> h3 .)
     $end            reduce using rule 6 (block -> h3 .)
 
 
@@ -198,43 +244,85 @@ state 3
     H2OPEN          reduce using rule 4 (block -> h1 .)
     H3OPEN          reduce using rule 4 (block -> h1 .)
     HR              reduce using rule 4 (block -> h1 .)
+    BLOCKCODEOPEN   reduce using rule 4 (block -> h1 .)
     LI              reduce using rule 4 (block -> h1 .)
+    QUOTELINE       reduce using rule 4 (block -> h1 .)
     PLAIN           reduce using rule 4 (block -> h1 .)
     STRONGOPEN      reduce using rule 4 (block -> h1 .)
     ITALICOPEN      reduce using rule 4 (block -> h1 .)
     ICOPEN          reduce using rule 4 (block -> h1 .)
     LSBRC           reduce using rule 4 (block -> h1 .)
     ALOPEN          reduce using rule 4 (block -> h1 .)
+    QLSBRC          reduce using rule 4 (block -> h1 .)
     $end            reduce using rule 4 (block -> h1 .)
 
 
 state 4
 
-    (11) block-list -> list-items .
+    (14) blockquote -> quotelines .
 
-    BLOCKDIV        reduce using rule 11 (block-list -> list-items .)
-    H1OPEN          reduce using rule 11 (block-list -> list-items .)
-    H2OPEN          reduce using rule 11 (block-list -> list-items .)
-    H3OPEN          reduce using rule 11 (block-list -> list-items .)
-    HR              reduce using rule 11 (block-list -> list-items .)
-    LI              reduce using rule 11 (block-list -> list-items .)
-    PLAIN           reduce using rule 11 (block-list -> list-items .)
-    STRONGOPEN      reduce using rule 11 (block-list -> list-items .)
-    ITALICOPEN      reduce using rule 11 (block-list -> list-items .)
-    ICOPEN          reduce using rule 11 (block-list -> list-items .)
-    LSBRC           reduce using rule 11 (block-list -> list-items .)
-    ALOPEN          reduce using rule 11 (block-list -> list-items .)
-    $end            reduce using rule 11 (block-list -> list-items .)
+    BLOCKDIV        reduce using rule 14 (blockquote -> quotelines .)
+    H1OPEN          reduce using rule 14 (blockquote -> quotelines .)
+    H2OPEN          reduce using rule 14 (blockquote -> quotelines .)
+    H3OPEN          reduce using rule 14 (blockquote -> quotelines .)
+    HR              reduce using rule 14 (blockquote -> quotelines .)
+    BLOCKCODEOPEN   reduce using rule 14 (blockquote -> quotelines .)
+    LI              reduce using rule 14 (blockquote -> quotelines .)
+    QUOTELINE       reduce using rule 14 (blockquote -> quotelines .)
+    PLAIN           reduce using rule 14 (blockquote -> quotelines .)
+    STRONGOPEN      reduce using rule 14 (blockquote -> quotelines .)
+    ITALICOPEN      reduce using rule 14 (blockquote -> quotelines .)
+    ICOPEN          reduce using rule 14 (blockquote -> quotelines .)
+    LSBRC           reduce using rule 14 (blockquote -> quotelines .)
+    ALOPEN          reduce using rule 14 (blockquote -> quotelines .)
+    QLSBRC          reduce using rule 14 (blockquote -> quotelines .)
+    $end            reduce using rule 14 (blockquote -> quotelines .)
 
 
 state 5
 
-    (23) h2 -> H2OPEN . PLAIN H2CLOSE
+    (19) block-list -> list-items .
 
-    PLAIN           shift and go to state 18
+    BLOCKDIV        reduce using rule 19 (block-list -> list-items .)
+    H1OPEN          reduce using rule 19 (block-list -> list-items .)
+    H2OPEN          reduce using rule 19 (block-list -> list-items .)
+    H3OPEN          reduce using rule 19 (block-list -> list-items .)
+    HR              reduce using rule 19 (block-list -> list-items .)
+    BLOCKCODEOPEN   reduce using rule 19 (block-list -> list-items .)
+    LI              reduce using rule 19 (block-list -> list-items .)
+    QUOTELINE       reduce using rule 19 (block-list -> list-items .)
+    PLAIN           reduce using rule 19 (block-list -> list-items .)
+    STRONGOPEN      reduce using rule 19 (block-list -> list-items .)
+    ITALICOPEN      reduce using rule 19 (block-list -> list-items .)
+    ICOPEN          reduce using rule 19 (block-list -> list-items .)
+    LSBRC           reduce using rule 19 (block-list -> list-items .)
+    ALOPEN          reduce using rule 19 (block-list -> list-items .)
+    QLSBRC          reduce using rule 19 (block-list -> list-items .)
+    $end            reduce using rule 19 (block-list -> list-items .)
 
 
 state 6
+
+    (15) quotelines -> quoteline . quotelines
+    (15) quotelines -> . quoteline quotelines
+    (16) quotelines -> . BLOCKDIV
+    (17) quoteline -> . QUOTELINE inline NEWL
+    (18) quoteline -> . QUOTELINE inline
+
+    BLOCKDIV        shift and go to state 25
+    QUOTELINE       shift and go to state 11
+
+    quoteline                      shift and go to state 6
+    quotelines                     shift and go to state 24
+
+state 7
+
+    (32) h2 -> H2OPEN . PLAIN H2CLOSE
+
+    PLAIN           shift and go to state 26
+
+
+state 8
 
     (8) block -> block-list .
 
@@ -243,91 +331,187 @@ state 6
     H2OPEN          reduce using rule 8 (block -> block-list .)
     H3OPEN          reduce using rule 8 (block -> block-list .)
     HR              reduce using rule 8 (block -> block-list .)
+    BLOCKCODEOPEN   reduce using rule 8 (block -> block-list .)
     LI              reduce using rule 8 (block -> block-list .)
+    QUOTELINE       reduce using rule 8 (block -> block-list .)
     PLAIN           reduce using rule 8 (block -> block-list .)
     STRONGOPEN      reduce using rule 8 (block -> block-list .)
     ITALICOPEN      reduce using rule 8 (block -> block-list .)
     ICOPEN          reduce using rule 8 (block -> block-list .)
     LSBRC           reduce using rule 8 (block -> block-list .)
     ALOPEN          reduce using rule 8 (block -> block-list .)
+    QLSBRC          reduce using rule 8 (block -> block-list .)
     $end            reduce using rule 8 (block -> block-list .)
-
-
-state 7
-
-    (14) list-item -> LI .
-
-    BLOCKDIV        reduce using rule 14 (list-item -> LI .)
-    LI              reduce using rule 14 (list-item -> LI .)
-
-
-state 8
-
-    (25) hr -> HR .
-
-    BLOCKDIV        reduce using rule 25 (hr -> HR .)
-    H1OPEN          reduce using rule 25 (hr -> HR .)
-    H2OPEN          reduce using rule 25 (hr -> HR .)
-    H3OPEN          reduce using rule 25 (hr -> HR .)
-    HR              reduce using rule 25 (hr -> HR .)
-    LI              reduce using rule 25 (hr -> HR .)
-    PLAIN           reduce using rule 25 (hr -> HR .)
-    STRONGOPEN      reduce using rule 25 (hr -> HR .)
-    ITALICOPEN      reduce using rule 25 (hr -> HR .)
-    ICOPEN          reduce using rule 25 (hr -> HR .)
-    LSBRC           reduce using rule 25 (hr -> HR .)
-    ALOPEN          reduce using rule 25 (hr -> HR .)
-    $end            reduce using rule 25 (hr -> HR .)
 
 
 state 9
 
+    (22) list-item -> LI .
+
+    BLOCKDIV        reduce using rule 22 (list-item -> LI .)
+    LI              reduce using rule 22 (list-item -> LI .)
+
+
+state 10
+
+    (34) hr -> HR .
+
+    BLOCKDIV        reduce using rule 34 (hr -> HR .)
+    H1OPEN          reduce using rule 34 (hr -> HR .)
+    H2OPEN          reduce using rule 34 (hr -> HR .)
+    H3OPEN          reduce using rule 34 (hr -> HR .)
+    HR              reduce using rule 34 (hr -> HR .)
+    BLOCKCODEOPEN   reduce using rule 34 (hr -> HR .)
+    LI              reduce using rule 34 (hr -> HR .)
+    QUOTELINE       reduce using rule 34 (hr -> HR .)
+    PLAIN           reduce using rule 34 (hr -> HR .)
+    STRONGOPEN      reduce using rule 34 (hr -> HR .)
+    ITALICOPEN      reduce using rule 34 (hr -> HR .)
+    ICOPEN          reduce using rule 34 (hr -> HR .)
+    LSBRC           reduce using rule 34 (hr -> HR .)
+    ALOPEN          reduce using rule 34 (hr -> HR .)
+    QLSBRC          reduce using rule 34 (hr -> HR .)
+    $end            reduce using rule 34 (hr -> HR .)
+
+
+state 11
+
+    (17) quoteline -> QUOTELINE . inline NEWL
+    (18) quoteline -> QUOTELINE . inline
+    (23) inline -> . inline PLAIN
+    (24) inline -> . inline strong
+    (25) inline -> . inline italic
+    (26) inline -> . inline inline-code
+    (27) inline -> . inline named-link
+    (28) inline -> . inline auto-link
+    (29) inline -> . inline image
+    (30) inline -> .
+
+    NEWL            reduce using rule 30 (inline -> .)
+    PLAIN           reduce using rule 30 (inline -> .)
+    STRONGOPEN      reduce using rule 30 (inline -> .)
+    ITALICOPEN      reduce using rule 30 (inline -> .)
+    ICOPEN          reduce using rule 30 (inline -> .)
+    LSBRC           reduce using rule 30 (inline -> .)
+    ALOPEN          reduce using rule 30 (inline -> .)
+    QLSBRC          reduce using rule 30 (inline -> .)
+    BLOCKDIV        reduce using rule 30 (inline -> .)
+    QUOTELINE       reduce using rule 30 (inline -> .)
+
+    inline                         shift and go to state 27
+
+state 12
+
     (3) block -> BLOCKDIV .
-    (13) list-items -> BLOCKDIV .
+    (21) list-items -> BLOCKDIV .
+    (16) quotelines -> BLOCKDIV .
 
   ! reduce/reduce conflict for BLOCKDIV resolved using rule 3 (block -> BLOCKDIV .)
   ! reduce/reduce conflict for H1OPEN resolved using rule 3 (block -> BLOCKDIV .)
   ! reduce/reduce conflict for H2OPEN resolved using rule 3 (block -> BLOCKDIV .)
   ! reduce/reduce conflict for H3OPEN resolved using rule 3 (block -> BLOCKDIV .)
   ! reduce/reduce conflict for HR resolved using rule 3 (block -> BLOCKDIV .)
+  ! reduce/reduce conflict for BLOCKCODEOPEN resolved using rule 3 (block -> BLOCKDIV .)
   ! reduce/reduce conflict for LI resolved using rule 3 (block -> BLOCKDIV .)
+  ! reduce/reduce conflict for QUOTELINE resolved using rule 3 (block -> BLOCKDIV .)
   ! reduce/reduce conflict for PLAIN resolved using rule 3 (block -> BLOCKDIV .)
   ! reduce/reduce conflict for STRONGOPEN resolved using rule 3 (block -> BLOCKDIV .)
   ! reduce/reduce conflict for ITALICOPEN resolved using rule 3 (block -> BLOCKDIV .)
   ! reduce/reduce conflict for ICOPEN resolved using rule 3 (block -> BLOCKDIV .)
   ! reduce/reduce conflict for LSBRC resolved using rule 3 (block -> BLOCKDIV .)
   ! reduce/reduce conflict for ALOPEN resolved using rule 3 (block -> BLOCKDIV .)
+  ! reduce/reduce conflict for QLSBRC resolved using rule 3 (block -> BLOCKDIV .)
+  ! reduce/reduce conflict for $end resolved using rule 3 (block -> BLOCKDIV .)
+  ! reduce/reduce conflict for BLOCKDIV resolved using rule 3 (block -> BLOCKDIV .)
+  ! reduce/reduce conflict for H1OPEN resolved using rule 3 (block -> BLOCKDIV .)
+  ! reduce/reduce conflict for H2OPEN resolved using rule 3 (block -> BLOCKDIV .)
+  ! reduce/reduce conflict for H3OPEN resolved using rule 3 (block -> BLOCKDIV .)
+  ! reduce/reduce conflict for HR resolved using rule 3 (block -> BLOCKDIV .)
+  ! reduce/reduce conflict for BLOCKCODEOPEN resolved using rule 3 (block -> BLOCKDIV .)
+  ! reduce/reduce conflict for LI resolved using rule 3 (block -> BLOCKDIV .)
+  ! reduce/reduce conflict for QUOTELINE resolved using rule 3 (block -> BLOCKDIV .)
+  ! reduce/reduce conflict for PLAIN resolved using rule 3 (block -> BLOCKDIV .)
+  ! reduce/reduce conflict for STRONGOPEN resolved using rule 3 (block -> BLOCKDIV .)
+  ! reduce/reduce conflict for ITALICOPEN resolved using rule 3 (block -> BLOCKDIV .)
+  ! reduce/reduce conflict for ICOPEN resolved using rule 3 (block -> BLOCKDIV .)
+  ! reduce/reduce conflict for LSBRC resolved using rule 3 (block -> BLOCKDIV .)
+  ! reduce/reduce conflict for ALOPEN resolved using rule 3 (block -> BLOCKDIV .)
+  ! reduce/reduce conflict for QLSBRC resolved using rule 3 (block -> BLOCKDIV .)
   ! reduce/reduce conflict for $end resolved using rule 3 (block -> BLOCKDIV .)
     BLOCKDIV        reduce using rule 3 (block -> BLOCKDIV .)
     H1OPEN          reduce using rule 3 (block -> BLOCKDIV .)
     H2OPEN          reduce using rule 3 (block -> BLOCKDIV .)
     H3OPEN          reduce using rule 3 (block -> BLOCKDIV .)
     HR              reduce using rule 3 (block -> BLOCKDIV .)
+    BLOCKCODEOPEN   reduce using rule 3 (block -> BLOCKDIV .)
     LI              reduce using rule 3 (block -> BLOCKDIV .)
+    QUOTELINE       reduce using rule 3 (block -> BLOCKDIV .)
     PLAIN           reduce using rule 3 (block -> BLOCKDIV .)
     STRONGOPEN      reduce using rule 3 (block -> BLOCKDIV .)
     ITALICOPEN      reduce using rule 3 (block -> BLOCKDIV .)
     ICOPEN          reduce using rule 3 (block -> BLOCKDIV .)
     LSBRC           reduce using rule 3 (block -> BLOCKDIV .)
     ALOPEN          reduce using rule 3 (block -> BLOCKDIV .)
+    QLSBRC          reduce using rule 3 (block -> BLOCKDIV .)
     $end            reduce using rule 3 (block -> BLOCKDIV .)
 
-  ! BLOCKDIV        [ reduce using rule 13 (list-items -> BLOCKDIV .) ]
-  ! H1OPEN          [ reduce using rule 13 (list-items -> BLOCKDIV .) ]
-  ! H2OPEN          [ reduce using rule 13 (list-items -> BLOCKDIV .) ]
-  ! H3OPEN          [ reduce using rule 13 (list-items -> BLOCKDIV .) ]
-  ! HR              [ reduce using rule 13 (list-items -> BLOCKDIV .) ]
-  ! LI              [ reduce using rule 13 (list-items -> BLOCKDIV .) ]
-  ! PLAIN           [ reduce using rule 13 (list-items -> BLOCKDIV .) ]
-  ! STRONGOPEN      [ reduce using rule 13 (list-items -> BLOCKDIV .) ]
-  ! ITALICOPEN      [ reduce using rule 13 (list-items -> BLOCKDIV .) ]
-  ! ICOPEN          [ reduce using rule 13 (list-items -> BLOCKDIV .) ]
-  ! LSBRC           [ reduce using rule 13 (list-items -> BLOCKDIV .) ]
-  ! ALOPEN          [ reduce using rule 13 (list-items -> BLOCKDIV .) ]
-  ! $end            [ reduce using rule 13 (list-items -> BLOCKDIV .) ]
+  ! BLOCKDIV        [ reduce using rule 21 (list-items -> BLOCKDIV .) ]
+  ! H1OPEN          [ reduce using rule 21 (list-items -> BLOCKDIV .) ]
+  ! H2OPEN          [ reduce using rule 21 (list-items -> BLOCKDIV .) ]
+  ! H3OPEN          [ reduce using rule 21 (list-items -> BLOCKDIV .) ]
+  ! HR              [ reduce using rule 21 (list-items -> BLOCKDIV .) ]
+  ! BLOCKCODEOPEN   [ reduce using rule 21 (list-items -> BLOCKDIV .) ]
+  ! LI              [ reduce using rule 21 (list-items -> BLOCKDIV .) ]
+  ! QUOTELINE       [ reduce using rule 21 (list-items -> BLOCKDIV .) ]
+  ! PLAIN           [ reduce using rule 21 (list-items -> BLOCKDIV .) ]
+  ! STRONGOPEN      [ reduce using rule 21 (list-items -> BLOCKDIV .) ]
+  ! ITALICOPEN      [ reduce using rule 21 (list-items -> BLOCKDIV .) ]
+  ! ICOPEN          [ reduce using rule 21 (list-items -> BLOCKDIV .) ]
+  ! LSBRC           [ reduce using rule 21 (list-items -> BLOCKDIV .) ]
+  ! ALOPEN          [ reduce using rule 21 (list-items -> BLOCKDIV .) ]
+  ! QLSBRC          [ reduce using rule 21 (list-items -> BLOCKDIV .) ]
+  ! $end            [ reduce using rule 21 (list-items -> BLOCKDIV .) ]
+  ! BLOCKDIV        [ reduce using rule 16 (quotelines -> BLOCKDIV .) ]
+  ! H1OPEN          [ reduce using rule 16 (quotelines -> BLOCKDIV .) ]
+  ! H2OPEN          [ reduce using rule 16 (quotelines -> BLOCKDIV .) ]
+  ! H3OPEN          [ reduce using rule 16 (quotelines -> BLOCKDIV .) ]
+  ! HR              [ reduce using rule 16 (quotelines -> BLOCKDIV .) ]
+  ! BLOCKCODEOPEN   [ reduce using rule 16 (quotelines -> BLOCKDIV .) ]
+  ! LI              [ reduce using rule 16 (quotelines -> BLOCKDIV .) ]
+  ! QUOTELINE       [ reduce using rule 16 (quotelines -> BLOCKDIV .) ]
+  ! PLAIN           [ reduce using rule 16 (quotelines -> BLOCKDIV .) ]
+  ! STRONGOPEN      [ reduce using rule 16 (quotelines -> BLOCKDIV .) ]
+  ! ITALICOPEN      [ reduce using rule 16 (quotelines -> BLOCKDIV .) ]
+  ! ICOPEN          [ reduce using rule 16 (quotelines -> BLOCKDIV .) ]
+  ! LSBRC           [ reduce using rule 16 (quotelines -> BLOCKDIV .) ]
+  ! ALOPEN          [ reduce using rule 16 (quotelines -> BLOCKDIV .) ]
+  ! QLSBRC          [ reduce using rule 16 (quotelines -> BLOCKDIV .) ]
+  ! $end            [ reduce using rule 16 (quotelines -> BLOCKDIV .) ]
 
 
-state 10
+state 13
+
+    (10) block -> blockquote .
+
+    BLOCKDIV        reduce using rule 10 (block -> blockquote .)
+    H1OPEN          reduce using rule 10 (block -> blockquote .)
+    H2OPEN          reduce using rule 10 (block -> blockquote .)
+    H3OPEN          reduce using rule 10 (block -> blockquote .)
+    HR              reduce using rule 10 (block -> blockquote .)
+    BLOCKCODEOPEN   reduce using rule 10 (block -> blockquote .)
+    LI              reduce using rule 10 (block -> blockquote .)
+    QUOTELINE       reduce using rule 10 (block -> blockquote .)
+    PLAIN           reduce using rule 10 (block -> blockquote .)
+    STRONGOPEN      reduce using rule 10 (block -> blockquote .)
+    ITALICOPEN      reduce using rule 10 (block -> blockquote .)
+    ICOPEN          reduce using rule 10 (block -> blockquote .)
+    LSBRC           reduce using rule 10 (block -> blockquote .)
+    ALOPEN          reduce using rule 10 (block -> blockquote .)
+    QLSBRC          reduce using rule 10 (block -> blockquote .)
+    $end            reduce using rule 10 (block -> blockquote .)
+
+
+state 14
 
     (7) block -> hr .
 
@@ -336,37 +520,42 @@ state 10
     H2OPEN          reduce using rule 7 (block -> hr .)
     H3OPEN          reduce using rule 7 (block -> hr .)
     HR              reduce using rule 7 (block -> hr .)
+    BLOCKCODEOPEN   reduce using rule 7 (block -> hr .)
     LI              reduce using rule 7 (block -> hr .)
+    QUOTELINE       reduce using rule 7 (block -> hr .)
     PLAIN           reduce using rule 7 (block -> hr .)
     STRONGOPEN      reduce using rule 7 (block -> hr .)
     ITALICOPEN      reduce using rule 7 (block -> hr .)
     ICOPEN          reduce using rule 7 (block -> hr .)
     LSBRC           reduce using rule 7 (block -> hr .)
     ALOPEN          reduce using rule 7 (block -> hr .)
+    QLSBRC          reduce using rule 7 (block -> hr .)
     $end            reduce using rule 7 (block -> hr .)
 
 
-state 11
+state 15
 
-    (24) h3 -> H3OPEN . PLAIN H3CLOSE
+    (33) h3 -> H3OPEN . PLAIN H3CLOSE
 
-    PLAIN           shift and go to state 19
+    PLAIN           shift and go to state 28
 
 
-state 12
+state 16
 
-    (10) paragraph -> inline .
-    (15) inline -> inline . PLAIN
-    (16) inline -> inline . strong
-    (17) inline -> inline . italic
-    (18) inline -> inline . inline-code
-    (19) inline -> inline . named-link
-    (20) inline -> inline . auto-link
-    (26) strong -> . STRONGOPEN inline STRONGCLOSE
-    (27) italic -> . ITALICOPEN PLAIN ITALICCLOSE
-    (30) inline-code -> . ICOPEN PLAIN ICCLOSE
-    (28) named-link -> . LSBRC PLAIN RSBRC LBRC PLAIN RBRC
-    (29) auto-link -> . ALOPEN PLAIN ALCLOSE
+    (13) paragraph -> inline .
+    (23) inline -> inline . PLAIN
+    (24) inline -> inline . strong
+    (25) inline -> inline . italic
+    (26) inline -> inline . inline-code
+    (27) inline -> inline . named-link
+    (28) inline -> inline . auto-link
+    (29) inline -> inline . image
+    (35) strong -> . STRONGOPEN inline STRONGCLOSE
+    (36) italic -> . ITALICOPEN inline ITALICCLOSE
+    (40) inline-code -> . ICOPEN inline ICCLOSE
+    (37) named-link -> . LSBRC PLAIN RSBRC LBRC PLAIN RBRC
+    (39) auto-link -> . ALOPEN PLAIN ALCLOSE
+    (38) image -> . QLSBRC PLAIN RSBRC LBRC PLAIN RBRC
 
   ! shift/reduce conflict for PLAIN resolved as shift
   ! shift/reduce conflict for STRONGOPEN resolved as shift
@@ -374,60 +563,95 @@ state 12
   ! shift/reduce conflict for ICOPEN resolved as shift
   ! shift/reduce conflict for LSBRC resolved as shift
   ! shift/reduce conflict for ALOPEN resolved as shift
-    BLOCKDIV        reduce using rule 10 (paragraph -> inline .)
-    H1OPEN          reduce using rule 10 (paragraph -> inline .)
-    H2OPEN          reduce using rule 10 (paragraph -> inline .)
-    H3OPEN          reduce using rule 10 (paragraph -> inline .)
-    HR              reduce using rule 10 (paragraph -> inline .)
-    LI              reduce using rule 10 (paragraph -> inline .)
-    $end            reduce using rule 10 (paragraph -> inline .)
-    PLAIN           shift and go to state 23
-    STRONGOPEN      shift and go to state 26
-    ITALICOPEN      shift and go to state 24
-    ICOPEN          shift and go to state 22
-    LSBRC           shift and go to state 25
-    ALOPEN          shift and go to state 30
+  ! shift/reduce conflict for QLSBRC resolved as shift
+    BLOCKDIV        reduce using rule 13 (paragraph -> inline .)
+    H1OPEN          reduce using rule 13 (paragraph -> inline .)
+    H2OPEN          reduce using rule 13 (paragraph -> inline .)
+    H3OPEN          reduce using rule 13 (paragraph -> inline .)
+    HR              reduce using rule 13 (paragraph -> inline .)
+    BLOCKCODEOPEN   reduce using rule 13 (paragraph -> inline .)
+    LI              reduce using rule 13 (paragraph -> inline .)
+    QUOTELINE       reduce using rule 13 (paragraph -> inline .)
+    $end            reduce using rule 13 (paragraph -> inline .)
+    PLAIN           shift and go to state 33
+    STRONGOPEN      shift and go to state 37
+    ITALICOPEN      shift and go to state 35
+    ICOPEN          shift and go to state 32
+    LSBRC           shift and go to state 36
+    ALOPEN          shift and go to state 41
+    QLSBRC          shift and go to state 29
 
-  ! PLAIN           [ reduce using rule 10 (paragraph -> inline .) ]
-  ! STRONGOPEN      [ reduce using rule 10 (paragraph -> inline .) ]
-  ! ITALICOPEN      [ reduce using rule 10 (paragraph -> inline .) ]
-  ! ICOPEN          [ reduce using rule 10 (paragraph -> inline .) ]
-  ! LSBRC           [ reduce using rule 10 (paragraph -> inline .) ]
-  ! ALOPEN          [ reduce using rule 10 (paragraph -> inline .) ]
+  ! PLAIN           [ reduce using rule 13 (paragraph -> inline .) ]
+  ! STRONGOPEN      [ reduce using rule 13 (paragraph -> inline .) ]
+  ! ITALICOPEN      [ reduce using rule 13 (paragraph -> inline .) ]
+  ! ICOPEN          [ reduce using rule 13 (paragraph -> inline .) ]
+  ! LSBRC           [ reduce using rule 13 (paragraph -> inline .) ]
+  ! ALOPEN          [ reduce using rule 13 (paragraph -> inline .) ]
+  ! QLSBRC          [ reduce using rule 13 (paragraph -> inline .) ]
 
-    named-link                     shift and go to state 20
-    auto-link                      shift and go to state 21
-    italic                         shift and go to state 27
-    strong                         shift and go to state 28
-    inline-code                    shift and go to state 29
+    named-link                     shift and go to state 30
+    auto-link                      shift and go to state 31
+    image                          shift and go to state 34
+    italic                         shift and go to state 38
+    strong                         shift and go to state 39
+    inline-code                    shift and go to state 40
 
-state 13
+state 17
 
     (0) S' -> article .
 
 
 
-state 14
+state 18
 
-    (22) h1 -> H1OPEN . PLAIN H1CLOSE
+    (11) block -> blockcode .
 
-    PLAIN           shift and go to state 31
+    BLOCKDIV        reduce using rule 11 (block -> blockcode .)
+    H1OPEN          reduce using rule 11 (block -> blockcode .)
+    H2OPEN          reduce using rule 11 (block -> blockcode .)
+    H3OPEN          reduce using rule 11 (block -> blockcode .)
+    HR              reduce using rule 11 (block -> blockcode .)
+    BLOCKCODEOPEN   reduce using rule 11 (block -> blockcode .)
+    LI              reduce using rule 11 (block -> blockcode .)
+    QUOTELINE       reduce using rule 11 (block -> blockcode .)
+    PLAIN           reduce using rule 11 (block -> blockcode .)
+    STRONGOPEN      reduce using rule 11 (block -> blockcode .)
+    ITALICOPEN      reduce using rule 11 (block -> blockcode .)
+    ICOPEN          reduce using rule 11 (block -> blockcode .)
+    LSBRC           reduce using rule 11 (block -> blockcode .)
+    ALOPEN          reduce using rule 11 (block -> blockcode .)
+    QLSBRC          reduce using rule 11 (block -> blockcode .)
+    $end            reduce using rule 11 (block -> blockcode .)
 
 
-state 15
+state 19
 
-    (12) list-items -> list-item . list-items
-    (12) list-items -> . list-item list-items
-    (13) list-items -> . BLOCKDIV
-    (14) list-item -> . LI
+    (31) h1 -> H1OPEN . PLAIN H1CLOSE
 
-    BLOCKDIV        shift and go to state 32
-    LI              shift and go to state 7
+    PLAIN           shift and go to state 42
 
-    list-item                      shift and go to state 15
-    list-items                     shift and go to state 33
 
-state 16
+state 20
+
+    (12) blockcode -> BLOCKCODEOPEN . PLAIN BLOCKCODECLOSE
+
+    PLAIN           shift and go to state 43
+
+
+state 21
+
+    (20) list-items -> list-item . list-items
+    (20) list-items -> . list-item list-items
+    (21) list-items -> . BLOCKDIV
+    (22) list-item -> . LI
+
+    BLOCKDIV        shift and go to state 44
+    LI              shift and go to state 9
+
+    list-item                      shift and go to state 21
+    list-items                     shift and go to state 45
+
+state 22
 
     (9) block -> paragraph .
 
@@ -436,17 +660,20 @@ state 16
     H2OPEN          reduce using rule 9 (block -> paragraph .)
     H3OPEN          reduce using rule 9 (block -> paragraph .)
     HR              reduce using rule 9 (block -> paragraph .)
+    BLOCKCODEOPEN   reduce using rule 9 (block -> paragraph .)
     LI              reduce using rule 9 (block -> paragraph .)
+    QUOTELINE       reduce using rule 9 (block -> paragraph .)
     PLAIN           reduce using rule 9 (block -> paragraph .)
     STRONGOPEN      reduce using rule 9 (block -> paragraph .)
     ITALICOPEN      reduce using rule 9 (block -> paragraph .)
     ICOPEN          reduce using rule 9 (block -> paragraph .)
     LSBRC           reduce using rule 9 (block -> paragraph .)
     ALOPEN          reduce using rule 9 (block -> paragraph .)
+    QLSBRC          reduce using rule 9 (block -> paragraph .)
     $end            reduce using rule 9 (block -> paragraph .)
 
 
-state 17
+state 23
 
     (1) article -> block . article
     (1) article -> . block article
@@ -458,532 +685,927 @@ state 17
     (7) block -> . hr
     (8) block -> . block-list
     (9) block -> . paragraph
-    (22) h1 -> . H1OPEN PLAIN H1CLOSE
-    (23) h2 -> . H2OPEN PLAIN H2CLOSE
-    (24) h3 -> . H3OPEN PLAIN H3CLOSE
-    (25) hr -> . HR
-    (11) block-list -> . list-items
-    (10) paragraph -> . inline
-    (12) list-items -> . list-item list-items
-    (13) list-items -> . BLOCKDIV
-    (15) inline -> . inline PLAIN
-    (16) inline -> . inline strong
-    (17) inline -> . inline italic
-    (18) inline -> . inline inline-code
-    (19) inline -> . inline named-link
-    (20) inline -> . inline auto-link
-    (21) inline -> .
-    (14) list-item -> . LI
+    (10) block -> . blockquote
+    (11) block -> . blockcode
+    (31) h1 -> . H1OPEN PLAIN H1CLOSE
+    (32) h2 -> . H2OPEN PLAIN H2CLOSE
+    (33) h3 -> . H3OPEN PLAIN H3CLOSE
+    (34) hr -> . HR
+    (19) block-list -> . list-items
+    (13) paragraph -> . inline
+    (14) blockquote -> . quotelines
+    (12) blockcode -> . BLOCKCODEOPEN PLAIN BLOCKCODECLOSE
+    (20) list-items -> . list-item list-items
+    (21) list-items -> . BLOCKDIV
+    (23) inline -> . inline PLAIN
+    (24) inline -> . inline strong
+    (25) inline -> . inline italic
+    (26) inline -> . inline inline-code
+    (27) inline -> . inline named-link
+    (28) inline -> . inline auto-link
+    (29) inline -> . inline image
+    (30) inline -> .
+    (15) quotelines -> . quoteline quotelines
+    (16) quotelines -> . BLOCKDIV
+    (22) list-item -> . LI
+    (17) quoteline -> . QUOTELINE inline NEWL
+    (18) quoteline -> . QUOTELINE inline
 
   ! shift/reduce conflict for BLOCKDIV resolved as shift
   ! shift/reduce conflict for H1OPEN resolved as shift
   ! shift/reduce conflict for H2OPEN resolved as shift
   ! shift/reduce conflict for H3OPEN resolved as shift
   ! shift/reduce conflict for HR resolved as shift
+  ! shift/reduce conflict for BLOCKCODEOPEN resolved as shift
   ! reduce/reduce conflict for $end resolved using rule 2 (article -> .)
   ! shift/reduce conflict for LI resolved as shift
+  ! shift/reduce conflict for QUOTELINE resolved as shift
     $end            reduce using rule 2 (article -> .)
-    BLOCKDIV        shift and go to state 9
-    H1OPEN          shift and go to state 14
-    H2OPEN          shift and go to state 5
-    H3OPEN          shift and go to state 11
-    HR              shift and go to state 8
-    PLAIN           reduce using rule 21 (inline -> .)
-    STRONGOPEN      reduce using rule 21 (inline -> .)
-    ITALICOPEN      reduce using rule 21 (inline -> .)
-    ICOPEN          reduce using rule 21 (inline -> .)
-    LSBRC           reduce using rule 21 (inline -> .)
-    ALOPEN          reduce using rule 21 (inline -> .)
-    LI              shift and go to state 7
+    BLOCKDIV        shift and go to state 12
+    H1OPEN          shift and go to state 19
+    H2OPEN          shift and go to state 7
+    H3OPEN          shift and go to state 15
+    HR              shift and go to state 10
+    BLOCKCODEOPEN   shift and go to state 20
+    PLAIN           reduce using rule 30 (inline -> .)
+    STRONGOPEN      reduce using rule 30 (inline -> .)
+    ITALICOPEN      reduce using rule 30 (inline -> .)
+    ICOPEN          reduce using rule 30 (inline -> .)
+    LSBRC           reduce using rule 30 (inline -> .)
+    ALOPEN          reduce using rule 30 (inline -> .)
+    QLSBRC          reduce using rule 30 (inline -> .)
+    LI              shift and go to state 9
+    QUOTELINE       shift and go to state 11
 
-  ! BLOCKDIV        [ reduce using rule 21 (inline -> .) ]
-  ! H1OPEN          [ reduce using rule 21 (inline -> .) ]
-  ! H2OPEN          [ reduce using rule 21 (inline -> .) ]
-  ! H3OPEN          [ reduce using rule 21 (inline -> .) ]
-  ! HR              [ reduce using rule 21 (inline -> .) ]
-  ! LI              [ reduce using rule 21 (inline -> .) ]
-  ! $end            [ reduce using rule 21 (inline -> .) ]
+  ! BLOCKDIV        [ reduce using rule 30 (inline -> .) ]
+  ! H1OPEN          [ reduce using rule 30 (inline -> .) ]
+  ! H2OPEN          [ reduce using rule 30 (inline -> .) ]
+  ! H3OPEN          [ reduce using rule 30 (inline -> .) ]
+  ! HR              [ reduce using rule 30 (inline -> .) ]
+  ! BLOCKCODEOPEN   [ reduce using rule 30 (inline -> .) ]
+  ! LI              [ reduce using rule 30 (inline -> .) ]
+  ! QUOTELINE       [ reduce using rule 30 (inline -> .) ]
+  ! $end            [ reduce using rule 30 (inline -> .) ]
 
-    list-items                     shift and go to state 4
+    blockcode                      shift and go to state 18
+    blockquote                     shift and go to state 13
+    list-items                     shift and go to state 5
     h2                             shift and go to state 1
     h3                             shift and go to state 2
     h1                             shift and go to state 3
-    block-list                     shift and go to state 6
-    hr                             shift and go to state 10
-    paragraph                      shift and go to state 16
-    inline                         shift and go to state 12
-    article                        shift and go to state 34
-    block                          shift and go to state 17
-    list-item                      shift and go to state 15
-
-state 18
-
-    (23) h2 -> H2OPEN PLAIN . H2CLOSE
-
-    H2CLOSE         shift and go to state 35
-
-
-state 19
-
-    (24) h3 -> H3OPEN PLAIN . H3CLOSE
-
-    H3CLOSE         shift and go to state 36
-
-
-state 20
-
-    (19) inline -> inline named-link .
-
-    PLAIN           reduce using rule 19 (inline -> inline named-link .)
-    STRONGOPEN      reduce using rule 19 (inline -> inline named-link .)
-    ITALICOPEN      reduce using rule 19 (inline -> inline named-link .)
-    ICOPEN          reduce using rule 19 (inline -> inline named-link .)
-    LSBRC           reduce using rule 19 (inline -> inline named-link .)
-    ALOPEN          reduce using rule 19 (inline -> inline named-link .)
-    BLOCKDIV        reduce using rule 19 (inline -> inline named-link .)
-    H1OPEN          reduce using rule 19 (inline -> inline named-link .)
-    H2OPEN          reduce using rule 19 (inline -> inline named-link .)
-    H3OPEN          reduce using rule 19 (inline -> inline named-link .)
-    HR              reduce using rule 19 (inline -> inline named-link .)
-    LI              reduce using rule 19 (inline -> inline named-link .)
-    $end            reduce using rule 19 (inline -> inline named-link .)
-    STRONGCLOSE     reduce using rule 19 (inline -> inline named-link .)
-
-
-state 21
-
-    (20) inline -> inline auto-link .
-
-    PLAIN           reduce using rule 20 (inline -> inline auto-link .)
-    STRONGOPEN      reduce using rule 20 (inline -> inline auto-link .)
-    ITALICOPEN      reduce using rule 20 (inline -> inline auto-link .)
-    ICOPEN          reduce using rule 20 (inline -> inline auto-link .)
-    LSBRC           reduce using rule 20 (inline -> inline auto-link .)
-    ALOPEN          reduce using rule 20 (inline -> inline auto-link .)
-    BLOCKDIV        reduce using rule 20 (inline -> inline auto-link .)
-    H1OPEN          reduce using rule 20 (inline -> inline auto-link .)
-    H2OPEN          reduce using rule 20 (inline -> inline auto-link .)
-    H3OPEN          reduce using rule 20 (inline -> inline auto-link .)
-    HR              reduce using rule 20 (inline -> inline auto-link .)
-    LI              reduce using rule 20 (inline -> inline auto-link .)
-    $end            reduce using rule 20 (inline -> inline auto-link .)
-    STRONGCLOSE     reduce using rule 20 (inline -> inline auto-link .)
-
-
-state 22
-
-    (30) inline-code -> ICOPEN . PLAIN ICCLOSE
-
-    PLAIN           shift and go to state 37
-
-
-state 23
-
-    (15) inline -> inline PLAIN .
-
-    PLAIN           reduce using rule 15 (inline -> inline PLAIN .)
-    STRONGOPEN      reduce using rule 15 (inline -> inline PLAIN .)
-    ITALICOPEN      reduce using rule 15 (inline -> inline PLAIN .)
-    ICOPEN          reduce using rule 15 (inline -> inline PLAIN .)
-    LSBRC           reduce using rule 15 (inline -> inline PLAIN .)
-    ALOPEN          reduce using rule 15 (inline -> inline PLAIN .)
-    BLOCKDIV        reduce using rule 15 (inline -> inline PLAIN .)
-    H1OPEN          reduce using rule 15 (inline -> inline PLAIN .)
-    H2OPEN          reduce using rule 15 (inline -> inline PLAIN .)
-    H3OPEN          reduce using rule 15 (inline -> inline PLAIN .)
-    HR              reduce using rule 15 (inline -> inline PLAIN .)
-    LI              reduce using rule 15 (inline -> inline PLAIN .)
-    $end            reduce using rule 15 (inline -> inline PLAIN .)
-    STRONGCLOSE     reduce using rule 15 (inline -> inline PLAIN .)
-
+    block-list                     shift and go to state 8
+    quotelines                     shift and go to state 4
+    hr                             shift and go to state 14
+    paragraph                      shift and go to state 22
+    inline                         shift and go to state 16
+    article                        shift and go to state 46
+    quoteline                      shift and go to state 6
+    block                          shift and go to state 23
+    list-item                      shift and go to state 21
 
 state 24
 
-    (27) italic -> ITALICOPEN . PLAIN ITALICCLOSE
+    (15) quotelines -> quoteline quotelines .
 
-    PLAIN           shift and go to state 38
+    BLOCKDIV        reduce using rule 15 (quotelines -> quoteline quotelines .)
+    H1OPEN          reduce using rule 15 (quotelines -> quoteline quotelines .)
+    H2OPEN          reduce using rule 15 (quotelines -> quoteline quotelines .)
+    H3OPEN          reduce using rule 15 (quotelines -> quoteline quotelines .)
+    HR              reduce using rule 15 (quotelines -> quoteline quotelines .)
+    BLOCKCODEOPEN   reduce using rule 15 (quotelines -> quoteline quotelines .)
+    LI              reduce using rule 15 (quotelines -> quoteline quotelines .)
+    QUOTELINE       reduce using rule 15 (quotelines -> quoteline quotelines .)
+    PLAIN           reduce using rule 15 (quotelines -> quoteline quotelines .)
+    STRONGOPEN      reduce using rule 15 (quotelines -> quoteline quotelines .)
+    ITALICOPEN      reduce using rule 15 (quotelines -> quoteline quotelines .)
+    ICOPEN          reduce using rule 15 (quotelines -> quoteline quotelines .)
+    LSBRC           reduce using rule 15 (quotelines -> quoteline quotelines .)
+    ALOPEN          reduce using rule 15 (quotelines -> quoteline quotelines .)
+    QLSBRC          reduce using rule 15 (quotelines -> quoteline quotelines .)
+    $end            reduce using rule 15 (quotelines -> quoteline quotelines .)
 
 
 state 25
 
-    (28) named-link -> LSBRC . PLAIN RSBRC LBRC PLAIN RBRC
+    (16) quotelines -> BLOCKDIV .
 
-    PLAIN           shift and go to state 39
+    BLOCKDIV        reduce using rule 16 (quotelines -> BLOCKDIV .)
+    H1OPEN          reduce using rule 16 (quotelines -> BLOCKDIV .)
+    H2OPEN          reduce using rule 16 (quotelines -> BLOCKDIV .)
+    H3OPEN          reduce using rule 16 (quotelines -> BLOCKDIV .)
+    HR              reduce using rule 16 (quotelines -> BLOCKDIV .)
+    BLOCKCODEOPEN   reduce using rule 16 (quotelines -> BLOCKDIV .)
+    LI              reduce using rule 16 (quotelines -> BLOCKDIV .)
+    QUOTELINE       reduce using rule 16 (quotelines -> BLOCKDIV .)
+    PLAIN           reduce using rule 16 (quotelines -> BLOCKDIV .)
+    STRONGOPEN      reduce using rule 16 (quotelines -> BLOCKDIV .)
+    ITALICOPEN      reduce using rule 16 (quotelines -> BLOCKDIV .)
+    ICOPEN          reduce using rule 16 (quotelines -> BLOCKDIV .)
+    LSBRC           reduce using rule 16 (quotelines -> BLOCKDIV .)
+    ALOPEN          reduce using rule 16 (quotelines -> BLOCKDIV .)
+    QLSBRC          reduce using rule 16 (quotelines -> BLOCKDIV .)
+    $end            reduce using rule 16 (quotelines -> BLOCKDIV .)
 
 
 state 26
 
-    (26) strong -> STRONGOPEN . inline STRONGCLOSE
-    (15) inline -> . inline PLAIN
-    (16) inline -> . inline strong
-    (17) inline -> . inline italic
-    (18) inline -> . inline inline-code
-    (19) inline -> . inline named-link
-    (20) inline -> . inline auto-link
-    (21) inline -> .
+    (32) h2 -> H2OPEN PLAIN . H2CLOSE
 
-    STRONGCLOSE     reduce using rule 21 (inline -> .)
-    PLAIN           reduce using rule 21 (inline -> .)
-    STRONGOPEN      reduce using rule 21 (inline -> .)
-    ITALICOPEN      reduce using rule 21 (inline -> .)
-    ICOPEN          reduce using rule 21 (inline -> .)
-    LSBRC           reduce using rule 21 (inline -> .)
-    ALOPEN          reduce using rule 21 (inline -> .)
+    H2CLOSE         shift and go to state 47
 
-    inline                         shift and go to state 40
 
 state 27
 
-    (17) inline -> inline italic .
+    (17) quoteline -> QUOTELINE inline . NEWL
+    (18) quoteline -> QUOTELINE inline .
+    (23) inline -> inline . PLAIN
+    (24) inline -> inline . strong
+    (25) inline -> inline . italic
+    (26) inline -> inline . inline-code
+    (27) inline -> inline . named-link
+    (28) inline -> inline . auto-link
+    (29) inline -> inline . image
+    (35) strong -> . STRONGOPEN inline STRONGCLOSE
+    (36) italic -> . ITALICOPEN inline ITALICCLOSE
+    (40) inline-code -> . ICOPEN inline ICCLOSE
+    (37) named-link -> . LSBRC PLAIN RSBRC LBRC PLAIN RBRC
+    (39) auto-link -> . ALOPEN PLAIN ALCLOSE
+    (38) image -> . QLSBRC PLAIN RSBRC LBRC PLAIN RBRC
 
-    PLAIN           reduce using rule 17 (inline -> inline italic .)
-    STRONGOPEN      reduce using rule 17 (inline -> inline italic .)
-    ITALICOPEN      reduce using rule 17 (inline -> inline italic .)
-    ICOPEN          reduce using rule 17 (inline -> inline italic .)
-    LSBRC           reduce using rule 17 (inline -> inline italic .)
-    ALOPEN          reduce using rule 17 (inline -> inline italic .)
-    BLOCKDIV        reduce using rule 17 (inline -> inline italic .)
-    H1OPEN          reduce using rule 17 (inline -> inline italic .)
-    H2OPEN          reduce using rule 17 (inline -> inline italic .)
-    H3OPEN          reduce using rule 17 (inline -> inline italic .)
-    HR              reduce using rule 17 (inline -> inline italic .)
-    LI              reduce using rule 17 (inline -> inline italic .)
-    $end            reduce using rule 17 (inline -> inline italic .)
-    STRONGCLOSE     reduce using rule 17 (inline -> inline italic .)
+    NEWL            shift and go to state 48
+    BLOCKDIV        reduce using rule 18 (quoteline -> QUOTELINE inline .)
+    QUOTELINE       reduce using rule 18 (quoteline -> QUOTELINE inline .)
+    PLAIN           shift and go to state 33
+    STRONGOPEN      shift and go to state 37
+    ITALICOPEN      shift and go to state 35
+    ICOPEN          shift and go to state 32
+    LSBRC           shift and go to state 36
+    ALOPEN          shift and go to state 41
+    QLSBRC          shift and go to state 29
 
+    named-link                     shift and go to state 30
+    auto-link                      shift and go to state 31
+    image                          shift and go to state 34
+    italic                         shift and go to state 38
+    strong                         shift and go to state 39
+    inline-code                    shift and go to state 40
 
 state 28
 
-    (16) inline -> inline strong .
+    (33) h3 -> H3OPEN PLAIN . H3CLOSE
 
-    PLAIN           reduce using rule 16 (inline -> inline strong .)
-    STRONGOPEN      reduce using rule 16 (inline -> inline strong .)
-    ITALICOPEN      reduce using rule 16 (inline -> inline strong .)
-    ICOPEN          reduce using rule 16 (inline -> inline strong .)
-    LSBRC           reduce using rule 16 (inline -> inline strong .)
-    ALOPEN          reduce using rule 16 (inline -> inline strong .)
-    BLOCKDIV        reduce using rule 16 (inline -> inline strong .)
-    H1OPEN          reduce using rule 16 (inline -> inline strong .)
-    H2OPEN          reduce using rule 16 (inline -> inline strong .)
-    H3OPEN          reduce using rule 16 (inline -> inline strong .)
-    HR              reduce using rule 16 (inline -> inline strong .)
-    LI              reduce using rule 16 (inline -> inline strong .)
-    $end            reduce using rule 16 (inline -> inline strong .)
-    STRONGCLOSE     reduce using rule 16 (inline -> inline strong .)
+    H3CLOSE         shift and go to state 49
 
 
 state 29
 
-    (18) inline -> inline inline-code .
+    (38) image -> QLSBRC . PLAIN RSBRC LBRC PLAIN RBRC
 
-    PLAIN           reduce using rule 18 (inline -> inline inline-code .)
-    STRONGOPEN      reduce using rule 18 (inline -> inline inline-code .)
-    ITALICOPEN      reduce using rule 18 (inline -> inline inline-code .)
-    ICOPEN          reduce using rule 18 (inline -> inline inline-code .)
-    LSBRC           reduce using rule 18 (inline -> inline inline-code .)
-    ALOPEN          reduce using rule 18 (inline -> inline inline-code .)
-    BLOCKDIV        reduce using rule 18 (inline -> inline inline-code .)
-    H1OPEN          reduce using rule 18 (inline -> inline inline-code .)
-    H2OPEN          reduce using rule 18 (inline -> inline inline-code .)
-    H3OPEN          reduce using rule 18 (inline -> inline inline-code .)
-    HR              reduce using rule 18 (inline -> inline inline-code .)
-    LI              reduce using rule 18 (inline -> inline inline-code .)
-    $end            reduce using rule 18 (inline -> inline inline-code .)
-    STRONGCLOSE     reduce using rule 18 (inline -> inline inline-code .)
+    PLAIN           shift and go to state 50
 
 
 state 30
 
-    (29) auto-link -> ALOPEN . PLAIN ALCLOSE
+    (27) inline -> inline named-link .
 
-    PLAIN           shift and go to state 41
+    ITALICCLOSE     reduce using rule 27 (inline -> inline named-link .)
+    PLAIN           reduce using rule 27 (inline -> inline named-link .)
+    STRONGOPEN      reduce using rule 27 (inline -> inline named-link .)
+    ITALICOPEN      reduce using rule 27 (inline -> inline named-link .)
+    ICOPEN          reduce using rule 27 (inline -> inline named-link .)
+    LSBRC           reduce using rule 27 (inline -> inline named-link .)
+    ALOPEN          reduce using rule 27 (inline -> inline named-link .)
+    QLSBRC          reduce using rule 27 (inline -> inline named-link .)
+    BLOCKDIV        reduce using rule 27 (inline -> inline named-link .)
+    H1OPEN          reduce using rule 27 (inline -> inline named-link .)
+    H2OPEN          reduce using rule 27 (inline -> inline named-link .)
+    H3OPEN          reduce using rule 27 (inline -> inline named-link .)
+    HR              reduce using rule 27 (inline -> inline named-link .)
+    BLOCKCODEOPEN   reduce using rule 27 (inline -> inline named-link .)
+    LI              reduce using rule 27 (inline -> inline named-link .)
+    QUOTELINE       reduce using rule 27 (inline -> inline named-link .)
+    $end            reduce using rule 27 (inline -> inline named-link .)
+    NEWL            reduce using rule 27 (inline -> inline named-link .)
+    ICCLOSE         reduce using rule 27 (inline -> inline named-link .)
+    STRONGCLOSE     reduce using rule 27 (inline -> inline named-link .)
 
 
 state 31
 
-    (22) h1 -> H1OPEN PLAIN . H1CLOSE
+    (28) inline -> inline auto-link .
 
-    H1CLOSE         shift and go to state 42
+    ITALICCLOSE     reduce using rule 28 (inline -> inline auto-link .)
+    PLAIN           reduce using rule 28 (inline -> inline auto-link .)
+    STRONGOPEN      reduce using rule 28 (inline -> inline auto-link .)
+    ITALICOPEN      reduce using rule 28 (inline -> inline auto-link .)
+    ICOPEN          reduce using rule 28 (inline -> inline auto-link .)
+    LSBRC           reduce using rule 28 (inline -> inline auto-link .)
+    ALOPEN          reduce using rule 28 (inline -> inline auto-link .)
+    QLSBRC          reduce using rule 28 (inline -> inline auto-link .)
+    BLOCKDIV        reduce using rule 28 (inline -> inline auto-link .)
+    H1OPEN          reduce using rule 28 (inline -> inline auto-link .)
+    H2OPEN          reduce using rule 28 (inline -> inline auto-link .)
+    H3OPEN          reduce using rule 28 (inline -> inline auto-link .)
+    HR              reduce using rule 28 (inline -> inline auto-link .)
+    BLOCKCODEOPEN   reduce using rule 28 (inline -> inline auto-link .)
+    LI              reduce using rule 28 (inline -> inline auto-link .)
+    QUOTELINE       reduce using rule 28 (inline -> inline auto-link .)
+    $end            reduce using rule 28 (inline -> inline auto-link .)
+    NEWL            reduce using rule 28 (inline -> inline auto-link .)
+    ICCLOSE         reduce using rule 28 (inline -> inline auto-link .)
+    STRONGCLOSE     reduce using rule 28 (inline -> inline auto-link .)
 
 
 state 32
 
-    (13) list-items -> BLOCKDIV .
+    (40) inline-code -> ICOPEN . inline ICCLOSE
+    (23) inline -> . inline PLAIN
+    (24) inline -> . inline strong
+    (25) inline -> . inline italic
+    (26) inline -> . inline inline-code
+    (27) inline -> . inline named-link
+    (28) inline -> . inline auto-link
+    (29) inline -> . inline image
+    (30) inline -> .
 
-    BLOCKDIV        reduce using rule 13 (list-items -> BLOCKDIV .)
-    H1OPEN          reduce using rule 13 (list-items -> BLOCKDIV .)
-    H2OPEN          reduce using rule 13 (list-items -> BLOCKDIV .)
-    H3OPEN          reduce using rule 13 (list-items -> BLOCKDIV .)
-    HR              reduce using rule 13 (list-items -> BLOCKDIV .)
-    LI              reduce using rule 13 (list-items -> BLOCKDIV .)
-    PLAIN           reduce using rule 13 (list-items -> BLOCKDIV .)
-    STRONGOPEN      reduce using rule 13 (list-items -> BLOCKDIV .)
-    ITALICOPEN      reduce using rule 13 (list-items -> BLOCKDIV .)
-    ICOPEN          reduce using rule 13 (list-items -> BLOCKDIV .)
-    LSBRC           reduce using rule 13 (list-items -> BLOCKDIV .)
-    ALOPEN          reduce using rule 13 (list-items -> BLOCKDIV .)
-    $end            reduce using rule 13 (list-items -> BLOCKDIV .)
+    ICCLOSE         reduce using rule 30 (inline -> .)
+    PLAIN           reduce using rule 30 (inline -> .)
+    STRONGOPEN      reduce using rule 30 (inline -> .)
+    ITALICOPEN      reduce using rule 30 (inline -> .)
+    ICOPEN          reduce using rule 30 (inline -> .)
+    LSBRC           reduce using rule 30 (inline -> .)
+    ALOPEN          reduce using rule 30 (inline -> .)
+    QLSBRC          reduce using rule 30 (inline -> .)
 
+    inline                         shift and go to state 51
 
 state 33
 
-    (12) list-items -> list-item list-items .
+    (23) inline -> inline PLAIN .
 
-    BLOCKDIV        reduce using rule 12 (list-items -> list-item list-items .)
-    H1OPEN          reduce using rule 12 (list-items -> list-item list-items .)
-    H2OPEN          reduce using rule 12 (list-items -> list-item list-items .)
-    H3OPEN          reduce using rule 12 (list-items -> list-item list-items .)
-    HR              reduce using rule 12 (list-items -> list-item list-items .)
-    LI              reduce using rule 12 (list-items -> list-item list-items .)
-    PLAIN           reduce using rule 12 (list-items -> list-item list-items .)
-    STRONGOPEN      reduce using rule 12 (list-items -> list-item list-items .)
-    ITALICOPEN      reduce using rule 12 (list-items -> list-item list-items .)
-    ICOPEN          reduce using rule 12 (list-items -> list-item list-items .)
-    LSBRC           reduce using rule 12 (list-items -> list-item list-items .)
-    ALOPEN          reduce using rule 12 (list-items -> list-item list-items .)
-    $end            reduce using rule 12 (list-items -> list-item list-items .)
+    ITALICCLOSE     reduce using rule 23 (inline -> inline PLAIN .)
+    PLAIN           reduce using rule 23 (inline -> inline PLAIN .)
+    STRONGOPEN      reduce using rule 23 (inline -> inline PLAIN .)
+    ITALICOPEN      reduce using rule 23 (inline -> inline PLAIN .)
+    ICOPEN          reduce using rule 23 (inline -> inline PLAIN .)
+    LSBRC           reduce using rule 23 (inline -> inline PLAIN .)
+    ALOPEN          reduce using rule 23 (inline -> inline PLAIN .)
+    QLSBRC          reduce using rule 23 (inline -> inline PLAIN .)
+    BLOCKDIV        reduce using rule 23 (inline -> inline PLAIN .)
+    H1OPEN          reduce using rule 23 (inline -> inline PLAIN .)
+    H2OPEN          reduce using rule 23 (inline -> inline PLAIN .)
+    H3OPEN          reduce using rule 23 (inline -> inline PLAIN .)
+    HR              reduce using rule 23 (inline -> inline PLAIN .)
+    BLOCKCODEOPEN   reduce using rule 23 (inline -> inline PLAIN .)
+    LI              reduce using rule 23 (inline -> inline PLAIN .)
+    QUOTELINE       reduce using rule 23 (inline -> inline PLAIN .)
+    $end            reduce using rule 23 (inline -> inline PLAIN .)
+    NEWL            reduce using rule 23 (inline -> inline PLAIN .)
+    ICCLOSE         reduce using rule 23 (inline -> inline PLAIN .)
+    STRONGCLOSE     reduce using rule 23 (inline -> inline PLAIN .)
 
 
 state 34
+
+    (29) inline -> inline image .
+
+    ITALICCLOSE     reduce using rule 29 (inline -> inline image .)
+    PLAIN           reduce using rule 29 (inline -> inline image .)
+    STRONGOPEN      reduce using rule 29 (inline -> inline image .)
+    ITALICOPEN      reduce using rule 29 (inline -> inline image .)
+    ICOPEN          reduce using rule 29 (inline -> inline image .)
+    LSBRC           reduce using rule 29 (inline -> inline image .)
+    ALOPEN          reduce using rule 29 (inline -> inline image .)
+    QLSBRC          reduce using rule 29 (inline -> inline image .)
+    BLOCKDIV        reduce using rule 29 (inline -> inline image .)
+    H1OPEN          reduce using rule 29 (inline -> inline image .)
+    H2OPEN          reduce using rule 29 (inline -> inline image .)
+    H3OPEN          reduce using rule 29 (inline -> inline image .)
+    HR              reduce using rule 29 (inline -> inline image .)
+    BLOCKCODEOPEN   reduce using rule 29 (inline -> inline image .)
+    LI              reduce using rule 29 (inline -> inline image .)
+    QUOTELINE       reduce using rule 29 (inline -> inline image .)
+    $end            reduce using rule 29 (inline -> inline image .)
+    NEWL            reduce using rule 29 (inline -> inline image .)
+    ICCLOSE         reduce using rule 29 (inline -> inline image .)
+    STRONGCLOSE     reduce using rule 29 (inline -> inline image .)
+
+
+state 35
+
+    (36) italic -> ITALICOPEN . inline ITALICCLOSE
+    (23) inline -> . inline PLAIN
+    (24) inline -> . inline strong
+    (25) inline -> . inline italic
+    (26) inline -> . inline inline-code
+    (27) inline -> . inline named-link
+    (28) inline -> . inline auto-link
+    (29) inline -> . inline image
+    (30) inline -> .
+
+    ITALICCLOSE     reduce using rule 30 (inline -> .)
+    PLAIN           reduce using rule 30 (inline -> .)
+    STRONGOPEN      reduce using rule 30 (inline -> .)
+    ITALICOPEN      reduce using rule 30 (inline -> .)
+    ICOPEN          reduce using rule 30 (inline -> .)
+    LSBRC           reduce using rule 30 (inline -> .)
+    ALOPEN          reduce using rule 30 (inline -> .)
+    QLSBRC          reduce using rule 30 (inline -> .)
+
+    inline                         shift and go to state 52
+
+state 36
+
+    (37) named-link -> LSBRC . PLAIN RSBRC LBRC PLAIN RBRC
+
+    PLAIN           shift and go to state 53
+
+
+state 37
+
+    (35) strong -> STRONGOPEN . inline STRONGCLOSE
+    (23) inline -> . inline PLAIN
+    (24) inline -> . inline strong
+    (25) inline -> . inline italic
+    (26) inline -> . inline inline-code
+    (27) inline -> . inline named-link
+    (28) inline -> . inline auto-link
+    (29) inline -> . inline image
+    (30) inline -> .
+
+    STRONGCLOSE     reduce using rule 30 (inline -> .)
+    PLAIN           reduce using rule 30 (inline -> .)
+    STRONGOPEN      reduce using rule 30 (inline -> .)
+    ITALICOPEN      reduce using rule 30 (inline -> .)
+    ICOPEN          reduce using rule 30 (inline -> .)
+    LSBRC           reduce using rule 30 (inline -> .)
+    ALOPEN          reduce using rule 30 (inline -> .)
+    QLSBRC          reduce using rule 30 (inline -> .)
+
+    inline                         shift and go to state 54
+
+state 38
+
+    (25) inline -> inline italic .
+
+    ITALICCLOSE     reduce using rule 25 (inline -> inline italic .)
+    PLAIN           reduce using rule 25 (inline -> inline italic .)
+    STRONGOPEN      reduce using rule 25 (inline -> inline italic .)
+    ITALICOPEN      reduce using rule 25 (inline -> inline italic .)
+    ICOPEN          reduce using rule 25 (inline -> inline italic .)
+    LSBRC           reduce using rule 25 (inline -> inline italic .)
+    ALOPEN          reduce using rule 25 (inline -> inline italic .)
+    QLSBRC          reduce using rule 25 (inline -> inline italic .)
+    BLOCKDIV        reduce using rule 25 (inline -> inline italic .)
+    H1OPEN          reduce using rule 25 (inline -> inline italic .)
+    H2OPEN          reduce using rule 25 (inline -> inline italic .)
+    H3OPEN          reduce using rule 25 (inline -> inline italic .)
+    HR              reduce using rule 25 (inline -> inline italic .)
+    BLOCKCODEOPEN   reduce using rule 25 (inline -> inline italic .)
+    LI              reduce using rule 25 (inline -> inline italic .)
+    QUOTELINE       reduce using rule 25 (inline -> inline italic .)
+    $end            reduce using rule 25 (inline -> inline italic .)
+    NEWL            reduce using rule 25 (inline -> inline italic .)
+    ICCLOSE         reduce using rule 25 (inline -> inline italic .)
+    STRONGCLOSE     reduce using rule 25 (inline -> inline italic .)
+
+
+state 39
+
+    (24) inline -> inline strong .
+
+    ITALICCLOSE     reduce using rule 24 (inline -> inline strong .)
+    PLAIN           reduce using rule 24 (inline -> inline strong .)
+    STRONGOPEN      reduce using rule 24 (inline -> inline strong .)
+    ITALICOPEN      reduce using rule 24 (inline -> inline strong .)
+    ICOPEN          reduce using rule 24 (inline -> inline strong .)
+    LSBRC           reduce using rule 24 (inline -> inline strong .)
+    ALOPEN          reduce using rule 24 (inline -> inline strong .)
+    QLSBRC          reduce using rule 24 (inline -> inline strong .)
+    BLOCKDIV        reduce using rule 24 (inline -> inline strong .)
+    H1OPEN          reduce using rule 24 (inline -> inline strong .)
+    H2OPEN          reduce using rule 24 (inline -> inline strong .)
+    H3OPEN          reduce using rule 24 (inline -> inline strong .)
+    HR              reduce using rule 24 (inline -> inline strong .)
+    BLOCKCODEOPEN   reduce using rule 24 (inline -> inline strong .)
+    LI              reduce using rule 24 (inline -> inline strong .)
+    QUOTELINE       reduce using rule 24 (inline -> inline strong .)
+    $end            reduce using rule 24 (inline -> inline strong .)
+    NEWL            reduce using rule 24 (inline -> inline strong .)
+    ICCLOSE         reduce using rule 24 (inline -> inline strong .)
+    STRONGCLOSE     reduce using rule 24 (inline -> inline strong .)
+
+
+state 40
+
+    (26) inline -> inline inline-code .
+
+    ITALICCLOSE     reduce using rule 26 (inline -> inline inline-code .)
+    PLAIN           reduce using rule 26 (inline -> inline inline-code .)
+    STRONGOPEN      reduce using rule 26 (inline -> inline inline-code .)
+    ITALICOPEN      reduce using rule 26 (inline -> inline inline-code .)
+    ICOPEN          reduce using rule 26 (inline -> inline inline-code .)
+    LSBRC           reduce using rule 26 (inline -> inline inline-code .)
+    ALOPEN          reduce using rule 26 (inline -> inline inline-code .)
+    QLSBRC          reduce using rule 26 (inline -> inline inline-code .)
+    BLOCKDIV        reduce using rule 26 (inline -> inline inline-code .)
+    H1OPEN          reduce using rule 26 (inline -> inline inline-code .)
+    H2OPEN          reduce using rule 26 (inline -> inline inline-code .)
+    H3OPEN          reduce using rule 26 (inline -> inline inline-code .)
+    HR              reduce using rule 26 (inline -> inline inline-code .)
+    BLOCKCODEOPEN   reduce using rule 26 (inline -> inline inline-code .)
+    LI              reduce using rule 26 (inline -> inline inline-code .)
+    QUOTELINE       reduce using rule 26 (inline -> inline inline-code .)
+    $end            reduce using rule 26 (inline -> inline inline-code .)
+    NEWL            reduce using rule 26 (inline -> inline inline-code .)
+    ICCLOSE         reduce using rule 26 (inline -> inline inline-code .)
+    STRONGCLOSE     reduce using rule 26 (inline -> inline inline-code .)
+
+
+state 41
+
+    (39) auto-link -> ALOPEN . PLAIN ALCLOSE
+
+    PLAIN           shift and go to state 55
+
+
+state 42
+
+    (31) h1 -> H1OPEN PLAIN . H1CLOSE
+
+    H1CLOSE         shift and go to state 56
+
+
+state 43
+
+    (12) blockcode -> BLOCKCODEOPEN PLAIN . BLOCKCODECLOSE
+
+    BLOCKCODECLOSE  shift and go to state 57
+
+
+state 44
+
+    (21) list-items -> BLOCKDIV .
+
+    BLOCKDIV        reduce using rule 21 (list-items -> BLOCKDIV .)
+    H1OPEN          reduce using rule 21 (list-items -> BLOCKDIV .)
+    H2OPEN          reduce using rule 21 (list-items -> BLOCKDIV .)
+    H3OPEN          reduce using rule 21 (list-items -> BLOCKDIV .)
+    HR              reduce using rule 21 (list-items -> BLOCKDIV .)
+    BLOCKCODEOPEN   reduce using rule 21 (list-items -> BLOCKDIV .)
+    LI              reduce using rule 21 (list-items -> BLOCKDIV .)
+    QUOTELINE       reduce using rule 21 (list-items -> BLOCKDIV .)
+    PLAIN           reduce using rule 21 (list-items -> BLOCKDIV .)
+    STRONGOPEN      reduce using rule 21 (list-items -> BLOCKDIV .)
+    ITALICOPEN      reduce using rule 21 (list-items -> BLOCKDIV .)
+    ICOPEN          reduce using rule 21 (list-items -> BLOCKDIV .)
+    LSBRC           reduce using rule 21 (list-items -> BLOCKDIV .)
+    ALOPEN          reduce using rule 21 (list-items -> BLOCKDIV .)
+    QLSBRC          reduce using rule 21 (list-items -> BLOCKDIV .)
+    $end            reduce using rule 21 (list-items -> BLOCKDIV .)
+
+
+state 45
+
+    (20) list-items -> list-item list-items .
+
+    BLOCKDIV        reduce using rule 20 (list-items -> list-item list-items .)
+    H1OPEN          reduce using rule 20 (list-items -> list-item list-items .)
+    H2OPEN          reduce using rule 20 (list-items -> list-item list-items .)
+    H3OPEN          reduce using rule 20 (list-items -> list-item list-items .)
+    HR              reduce using rule 20 (list-items -> list-item list-items .)
+    BLOCKCODEOPEN   reduce using rule 20 (list-items -> list-item list-items .)
+    LI              reduce using rule 20 (list-items -> list-item list-items .)
+    QUOTELINE       reduce using rule 20 (list-items -> list-item list-items .)
+    PLAIN           reduce using rule 20 (list-items -> list-item list-items .)
+    STRONGOPEN      reduce using rule 20 (list-items -> list-item list-items .)
+    ITALICOPEN      reduce using rule 20 (list-items -> list-item list-items .)
+    ICOPEN          reduce using rule 20 (list-items -> list-item list-items .)
+    LSBRC           reduce using rule 20 (list-items -> list-item list-items .)
+    ALOPEN          reduce using rule 20 (list-items -> list-item list-items .)
+    QLSBRC          reduce using rule 20 (list-items -> list-item list-items .)
+    $end            reduce using rule 20 (list-items -> list-item list-items .)
+
+
+state 46
 
     (1) article -> block article .
 
     $end            reduce using rule 1 (article -> block article .)
 
 
-state 35
-
-    (23) h2 -> H2OPEN PLAIN H2CLOSE .
-
-    BLOCKDIV        reduce using rule 23 (h2 -> H2OPEN PLAIN H2CLOSE .)
-    H1OPEN          reduce using rule 23 (h2 -> H2OPEN PLAIN H2CLOSE .)
-    H2OPEN          reduce using rule 23 (h2 -> H2OPEN PLAIN H2CLOSE .)
-    H3OPEN          reduce using rule 23 (h2 -> H2OPEN PLAIN H2CLOSE .)
-    HR              reduce using rule 23 (h2 -> H2OPEN PLAIN H2CLOSE .)
-    LI              reduce using rule 23 (h2 -> H2OPEN PLAIN H2CLOSE .)
-    PLAIN           reduce using rule 23 (h2 -> H2OPEN PLAIN H2CLOSE .)
-    STRONGOPEN      reduce using rule 23 (h2 -> H2OPEN PLAIN H2CLOSE .)
-    ITALICOPEN      reduce using rule 23 (h2 -> H2OPEN PLAIN H2CLOSE .)
-    ICOPEN          reduce using rule 23 (h2 -> H2OPEN PLAIN H2CLOSE .)
-    LSBRC           reduce using rule 23 (h2 -> H2OPEN PLAIN H2CLOSE .)
-    ALOPEN          reduce using rule 23 (h2 -> H2OPEN PLAIN H2CLOSE .)
-    $end            reduce using rule 23 (h2 -> H2OPEN PLAIN H2CLOSE .)
-
-
-state 36
-
-    (24) h3 -> H3OPEN PLAIN H3CLOSE .
-
-    BLOCKDIV        reduce using rule 24 (h3 -> H3OPEN PLAIN H3CLOSE .)
-    H1OPEN          reduce using rule 24 (h3 -> H3OPEN PLAIN H3CLOSE .)
-    H2OPEN          reduce using rule 24 (h3 -> H3OPEN PLAIN H3CLOSE .)
-    H3OPEN          reduce using rule 24 (h3 -> H3OPEN PLAIN H3CLOSE .)
-    HR              reduce using rule 24 (h3 -> H3OPEN PLAIN H3CLOSE .)
-    LI              reduce using rule 24 (h3 -> H3OPEN PLAIN H3CLOSE .)
-    PLAIN           reduce using rule 24 (h3 -> H3OPEN PLAIN H3CLOSE .)
-    STRONGOPEN      reduce using rule 24 (h3 -> H3OPEN PLAIN H3CLOSE .)
-    ITALICOPEN      reduce using rule 24 (h3 -> H3OPEN PLAIN H3CLOSE .)
-    ICOPEN          reduce using rule 24 (h3 -> H3OPEN PLAIN H3CLOSE .)
-    LSBRC           reduce using rule 24 (h3 -> H3OPEN PLAIN H3CLOSE .)
-    ALOPEN          reduce using rule 24 (h3 -> H3OPEN PLAIN H3CLOSE .)
-    $end            reduce using rule 24 (h3 -> H3OPEN PLAIN H3CLOSE .)
-
-
-state 37
-
-    (30) inline-code -> ICOPEN PLAIN . ICCLOSE
-
-    ICCLOSE         shift and go to state 43
-
-
-state 38
-
-    (27) italic -> ITALICOPEN PLAIN . ITALICCLOSE
-
-    ITALICCLOSE     shift and go to state 44
-
-
-state 39
-
-    (28) named-link -> LSBRC PLAIN . RSBRC LBRC PLAIN RBRC
-
-    RSBRC           shift and go to state 45
-
-
-state 40
-
-    (26) strong -> STRONGOPEN inline . STRONGCLOSE
-    (15) inline -> inline . PLAIN
-    (16) inline -> inline . strong
-    (17) inline -> inline . italic
-    (18) inline -> inline . inline-code
-    (19) inline -> inline . named-link
-    (20) inline -> inline . auto-link
-    (26) strong -> . STRONGOPEN inline STRONGCLOSE
-    (27) italic -> . ITALICOPEN PLAIN ITALICCLOSE
-    (30) inline-code -> . ICOPEN PLAIN ICCLOSE
-    (28) named-link -> . LSBRC PLAIN RSBRC LBRC PLAIN RBRC
-    (29) auto-link -> . ALOPEN PLAIN ALCLOSE
-
-    STRONGCLOSE     shift and go to state 46
-    PLAIN           shift and go to state 23
-    STRONGOPEN      shift and go to state 26
-    ITALICOPEN      shift and go to state 24
-    ICOPEN          shift and go to state 22
-    LSBRC           shift and go to state 25
-    ALOPEN          shift and go to state 30
-
-    named-link                     shift and go to state 20
-    auto-link                      shift and go to state 21
-    italic                         shift and go to state 27
-    strong                         shift and go to state 28
-    inline-code                    shift and go to state 29
-
-state 41
-
-    (29) auto-link -> ALOPEN PLAIN . ALCLOSE
-
-    ALCLOSE         shift and go to state 47
-
-
-state 42
-
-    (22) h1 -> H1OPEN PLAIN H1CLOSE .
-
-    BLOCKDIV        reduce using rule 22 (h1 -> H1OPEN PLAIN H1CLOSE .)
-    H1OPEN          reduce using rule 22 (h1 -> H1OPEN PLAIN H1CLOSE .)
-    H2OPEN          reduce using rule 22 (h1 -> H1OPEN PLAIN H1CLOSE .)
-    H3OPEN          reduce using rule 22 (h1 -> H1OPEN PLAIN H1CLOSE .)
-    HR              reduce using rule 22 (h1 -> H1OPEN PLAIN H1CLOSE .)
-    LI              reduce using rule 22 (h1 -> H1OPEN PLAIN H1CLOSE .)
-    PLAIN           reduce using rule 22 (h1 -> H1OPEN PLAIN H1CLOSE .)
-    STRONGOPEN      reduce using rule 22 (h1 -> H1OPEN PLAIN H1CLOSE .)
-    ITALICOPEN      reduce using rule 22 (h1 -> H1OPEN PLAIN H1CLOSE .)
-    ICOPEN          reduce using rule 22 (h1 -> H1OPEN PLAIN H1CLOSE .)
-    LSBRC           reduce using rule 22 (h1 -> H1OPEN PLAIN H1CLOSE .)
-    ALOPEN          reduce using rule 22 (h1 -> H1OPEN PLAIN H1CLOSE .)
-    $end            reduce using rule 22 (h1 -> H1OPEN PLAIN H1CLOSE .)
-
-
-state 43
-
-    (30) inline-code -> ICOPEN PLAIN ICCLOSE .
-
-    STRONGCLOSE     reduce using rule 30 (inline-code -> ICOPEN PLAIN ICCLOSE .)
-    PLAIN           reduce using rule 30 (inline-code -> ICOPEN PLAIN ICCLOSE .)
-    STRONGOPEN      reduce using rule 30 (inline-code -> ICOPEN PLAIN ICCLOSE .)
-    ITALICOPEN      reduce using rule 30 (inline-code -> ICOPEN PLAIN ICCLOSE .)
-    ICOPEN          reduce using rule 30 (inline-code -> ICOPEN PLAIN ICCLOSE .)
-    LSBRC           reduce using rule 30 (inline-code -> ICOPEN PLAIN ICCLOSE .)
-    ALOPEN          reduce using rule 30 (inline-code -> ICOPEN PLAIN ICCLOSE .)
-    BLOCKDIV        reduce using rule 30 (inline-code -> ICOPEN PLAIN ICCLOSE .)
-    H1OPEN          reduce using rule 30 (inline-code -> ICOPEN PLAIN ICCLOSE .)
-    H2OPEN          reduce using rule 30 (inline-code -> ICOPEN PLAIN ICCLOSE .)
-    H3OPEN          reduce using rule 30 (inline-code -> ICOPEN PLAIN ICCLOSE .)
-    HR              reduce using rule 30 (inline-code -> ICOPEN PLAIN ICCLOSE .)
-    LI              reduce using rule 30 (inline-code -> ICOPEN PLAIN ICCLOSE .)
-    $end            reduce using rule 30 (inline-code -> ICOPEN PLAIN ICCLOSE .)
-
-
-state 44
-
-    (27) italic -> ITALICOPEN PLAIN ITALICCLOSE .
-
-    STRONGCLOSE     reduce using rule 27 (italic -> ITALICOPEN PLAIN ITALICCLOSE .)
-    PLAIN           reduce using rule 27 (italic -> ITALICOPEN PLAIN ITALICCLOSE .)
-    STRONGOPEN      reduce using rule 27 (italic -> ITALICOPEN PLAIN ITALICCLOSE .)
-    ITALICOPEN      reduce using rule 27 (italic -> ITALICOPEN PLAIN ITALICCLOSE .)
-    ICOPEN          reduce using rule 27 (italic -> ITALICOPEN PLAIN ITALICCLOSE .)
-    LSBRC           reduce using rule 27 (italic -> ITALICOPEN PLAIN ITALICCLOSE .)
-    ALOPEN          reduce using rule 27 (italic -> ITALICOPEN PLAIN ITALICCLOSE .)
-    BLOCKDIV        reduce using rule 27 (italic -> ITALICOPEN PLAIN ITALICCLOSE .)
-    H1OPEN          reduce using rule 27 (italic -> ITALICOPEN PLAIN ITALICCLOSE .)
-    H2OPEN          reduce using rule 27 (italic -> ITALICOPEN PLAIN ITALICCLOSE .)
-    H3OPEN          reduce using rule 27 (italic -> ITALICOPEN PLAIN ITALICCLOSE .)
-    HR              reduce using rule 27 (italic -> ITALICOPEN PLAIN ITALICCLOSE .)
-    LI              reduce using rule 27 (italic -> ITALICOPEN PLAIN ITALICCLOSE .)
-    $end            reduce using rule 27 (italic -> ITALICOPEN PLAIN ITALICCLOSE .)
-
-
-state 45
-
-    (28) named-link -> LSBRC PLAIN RSBRC . LBRC PLAIN RBRC
-
-    LBRC            shift and go to state 48
-
-
-state 46
-
-    (26) strong -> STRONGOPEN inline STRONGCLOSE .
-
-    PLAIN           reduce using rule 26 (strong -> STRONGOPEN inline STRONGCLOSE .)
-    STRONGOPEN      reduce using rule 26 (strong -> STRONGOPEN inline STRONGCLOSE .)
-    ITALICOPEN      reduce using rule 26 (strong -> STRONGOPEN inline STRONGCLOSE .)
-    ICOPEN          reduce using rule 26 (strong -> STRONGOPEN inline STRONGCLOSE .)
-    LSBRC           reduce using rule 26 (strong -> STRONGOPEN inline STRONGCLOSE .)
-    ALOPEN          reduce using rule 26 (strong -> STRONGOPEN inline STRONGCLOSE .)
-    BLOCKDIV        reduce using rule 26 (strong -> STRONGOPEN inline STRONGCLOSE .)
-    H1OPEN          reduce using rule 26 (strong -> STRONGOPEN inline STRONGCLOSE .)
-    H2OPEN          reduce using rule 26 (strong -> STRONGOPEN inline STRONGCLOSE .)
-    H3OPEN          reduce using rule 26 (strong -> STRONGOPEN inline STRONGCLOSE .)
-    HR              reduce using rule 26 (strong -> STRONGOPEN inline STRONGCLOSE .)
-    LI              reduce using rule 26 (strong -> STRONGOPEN inline STRONGCLOSE .)
-    $end            reduce using rule 26 (strong -> STRONGOPEN inline STRONGCLOSE .)
-    STRONGCLOSE     reduce using rule 26 (strong -> STRONGOPEN inline STRONGCLOSE .)
-
-
 state 47
 
-    (29) auto-link -> ALOPEN PLAIN ALCLOSE .
+    (32) h2 -> H2OPEN PLAIN H2CLOSE .
 
-    PLAIN           reduce using rule 29 (auto-link -> ALOPEN PLAIN ALCLOSE .)
-    STRONGOPEN      reduce using rule 29 (auto-link -> ALOPEN PLAIN ALCLOSE .)
-    ITALICOPEN      reduce using rule 29 (auto-link -> ALOPEN PLAIN ALCLOSE .)
-    ICOPEN          reduce using rule 29 (auto-link -> ALOPEN PLAIN ALCLOSE .)
-    LSBRC           reduce using rule 29 (auto-link -> ALOPEN PLAIN ALCLOSE .)
-    ALOPEN          reduce using rule 29 (auto-link -> ALOPEN PLAIN ALCLOSE .)
-    BLOCKDIV        reduce using rule 29 (auto-link -> ALOPEN PLAIN ALCLOSE .)
-    H1OPEN          reduce using rule 29 (auto-link -> ALOPEN PLAIN ALCLOSE .)
-    H2OPEN          reduce using rule 29 (auto-link -> ALOPEN PLAIN ALCLOSE .)
-    H3OPEN          reduce using rule 29 (auto-link -> ALOPEN PLAIN ALCLOSE .)
-    HR              reduce using rule 29 (auto-link -> ALOPEN PLAIN ALCLOSE .)
-    LI              reduce using rule 29 (auto-link -> ALOPEN PLAIN ALCLOSE .)
-    $end            reduce using rule 29 (auto-link -> ALOPEN PLAIN ALCLOSE .)
-    STRONGCLOSE     reduce using rule 29 (auto-link -> ALOPEN PLAIN ALCLOSE .)
+    BLOCKDIV        reduce using rule 32 (h2 -> H2OPEN PLAIN H2CLOSE .)
+    H1OPEN          reduce using rule 32 (h2 -> H2OPEN PLAIN H2CLOSE .)
+    H2OPEN          reduce using rule 32 (h2 -> H2OPEN PLAIN H2CLOSE .)
+    H3OPEN          reduce using rule 32 (h2 -> H2OPEN PLAIN H2CLOSE .)
+    HR              reduce using rule 32 (h2 -> H2OPEN PLAIN H2CLOSE .)
+    BLOCKCODEOPEN   reduce using rule 32 (h2 -> H2OPEN PLAIN H2CLOSE .)
+    LI              reduce using rule 32 (h2 -> H2OPEN PLAIN H2CLOSE .)
+    QUOTELINE       reduce using rule 32 (h2 -> H2OPEN PLAIN H2CLOSE .)
+    PLAIN           reduce using rule 32 (h2 -> H2OPEN PLAIN H2CLOSE .)
+    STRONGOPEN      reduce using rule 32 (h2 -> H2OPEN PLAIN H2CLOSE .)
+    ITALICOPEN      reduce using rule 32 (h2 -> H2OPEN PLAIN H2CLOSE .)
+    ICOPEN          reduce using rule 32 (h2 -> H2OPEN PLAIN H2CLOSE .)
+    LSBRC           reduce using rule 32 (h2 -> H2OPEN PLAIN H2CLOSE .)
+    ALOPEN          reduce using rule 32 (h2 -> H2OPEN PLAIN H2CLOSE .)
+    QLSBRC          reduce using rule 32 (h2 -> H2OPEN PLAIN H2CLOSE .)
+    $end            reduce using rule 32 (h2 -> H2OPEN PLAIN H2CLOSE .)
 
 
 state 48
 
-    (28) named-link -> LSBRC PLAIN RSBRC LBRC . PLAIN RBRC
+    (17) quoteline -> QUOTELINE inline NEWL .
 
-    PLAIN           shift and go to state 49
+    BLOCKDIV        reduce using rule 17 (quoteline -> QUOTELINE inline NEWL .)
+    QUOTELINE       reduce using rule 17 (quoteline -> QUOTELINE inline NEWL .)
 
 
 state 49
 
-    (28) named-link -> LSBRC PLAIN RSBRC LBRC PLAIN . RBRC
+    (33) h3 -> H3OPEN PLAIN H3CLOSE .
 
-    RBRC            shift and go to state 50
+    BLOCKDIV        reduce using rule 33 (h3 -> H3OPEN PLAIN H3CLOSE .)
+    H1OPEN          reduce using rule 33 (h3 -> H3OPEN PLAIN H3CLOSE .)
+    H2OPEN          reduce using rule 33 (h3 -> H3OPEN PLAIN H3CLOSE .)
+    H3OPEN          reduce using rule 33 (h3 -> H3OPEN PLAIN H3CLOSE .)
+    HR              reduce using rule 33 (h3 -> H3OPEN PLAIN H3CLOSE .)
+    BLOCKCODEOPEN   reduce using rule 33 (h3 -> H3OPEN PLAIN H3CLOSE .)
+    LI              reduce using rule 33 (h3 -> H3OPEN PLAIN H3CLOSE .)
+    QUOTELINE       reduce using rule 33 (h3 -> H3OPEN PLAIN H3CLOSE .)
+    PLAIN           reduce using rule 33 (h3 -> H3OPEN PLAIN H3CLOSE .)
+    STRONGOPEN      reduce using rule 33 (h3 -> H3OPEN PLAIN H3CLOSE .)
+    ITALICOPEN      reduce using rule 33 (h3 -> H3OPEN PLAIN H3CLOSE .)
+    ICOPEN          reduce using rule 33 (h3 -> H3OPEN PLAIN H3CLOSE .)
+    LSBRC           reduce using rule 33 (h3 -> H3OPEN PLAIN H3CLOSE .)
+    ALOPEN          reduce using rule 33 (h3 -> H3OPEN PLAIN H3CLOSE .)
+    QLSBRC          reduce using rule 33 (h3 -> H3OPEN PLAIN H3CLOSE .)
+    $end            reduce using rule 33 (h3 -> H3OPEN PLAIN H3CLOSE .)
 
 
 state 50
 
-    (28) named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC .
+    (38) image -> QLSBRC PLAIN . RSBRC LBRC PLAIN RBRC
 
-    PLAIN           reduce using rule 28 (named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
-    STRONGOPEN      reduce using rule 28 (named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
-    ITALICOPEN      reduce using rule 28 (named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
-    ICOPEN          reduce using rule 28 (named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
-    LSBRC           reduce using rule 28 (named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
-    ALOPEN          reduce using rule 28 (named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
-    BLOCKDIV        reduce using rule 28 (named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
-    H1OPEN          reduce using rule 28 (named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
-    H2OPEN          reduce using rule 28 (named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
-    H3OPEN          reduce using rule 28 (named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
-    HR              reduce using rule 28 (named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
-    LI              reduce using rule 28 (named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
-    $end            reduce using rule 28 (named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
-    STRONGCLOSE     reduce using rule 28 (named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    RSBRC           shift and go to state 58
+
+
+state 51
+
+    (40) inline-code -> ICOPEN inline . ICCLOSE
+    (23) inline -> inline . PLAIN
+    (24) inline -> inline . strong
+    (25) inline -> inline . italic
+    (26) inline -> inline . inline-code
+    (27) inline -> inline . named-link
+    (28) inline -> inline . auto-link
+    (29) inline -> inline . image
+    (35) strong -> . STRONGOPEN inline STRONGCLOSE
+    (36) italic -> . ITALICOPEN inline ITALICCLOSE
+    (40) inline-code -> . ICOPEN inline ICCLOSE
+    (37) named-link -> . LSBRC PLAIN RSBRC LBRC PLAIN RBRC
+    (39) auto-link -> . ALOPEN PLAIN ALCLOSE
+    (38) image -> . QLSBRC PLAIN RSBRC LBRC PLAIN RBRC
+
+    ICCLOSE         shift and go to state 59
+    PLAIN           shift and go to state 33
+    STRONGOPEN      shift and go to state 37
+    ITALICOPEN      shift and go to state 35
+    ICOPEN          shift and go to state 32
+    LSBRC           shift and go to state 36
+    ALOPEN          shift and go to state 41
+    QLSBRC          shift and go to state 29
+
+    named-link                     shift and go to state 30
+    auto-link                      shift and go to state 31
+    image                          shift and go to state 34
+    italic                         shift and go to state 38
+    strong                         shift and go to state 39
+    inline-code                    shift and go to state 40
+
+state 52
+
+    (36) italic -> ITALICOPEN inline . ITALICCLOSE
+    (23) inline -> inline . PLAIN
+    (24) inline -> inline . strong
+    (25) inline -> inline . italic
+    (26) inline -> inline . inline-code
+    (27) inline -> inline . named-link
+    (28) inline -> inline . auto-link
+    (29) inline -> inline . image
+    (35) strong -> . STRONGOPEN inline STRONGCLOSE
+    (36) italic -> . ITALICOPEN inline ITALICCLOSE
+    (40) inline-code -> . ICOPEN inline ICCLOSE
+    (37) named-link -> . LSBRC PLAIN RSBRC LBRC PLAIN RBRC
+    (39) auto-link -> . ALOPEN PLAIN ALCLOSE
+    (38) image -> . QLSBRC PLAIN RSBRC LBRC PLAIN RBRC
+
+    ITALICCLOSE     shift and go to state 60
+    PLAIN           shift and go to state 33
+    STRONGOPEN      shift and go to state 37
+    ITALICOPEN      shift and go to state 35
+    ICOPEN          shift and go to state 32
+    LSBRC           shift and go to state 36
+    ALOPEN          shift and go to state 41
+    QLSBRC          shift and go to state 29
+
+    named-link                     shift and go to state 30
+    auto-link                      shift and go to state 31
+    image                          shift and go to state 34
+    italic                         shift and go to state 38
+    strong                         shift and go to state 39
+    inline-code                    shift and go to state 40
+
+state 53
+
+    (37) named-link -> LSBRC PLAIN . RSBRC LBRC PLAIN RBRC
+
+    RSBRC           shift and go to state 61
+
+
+state 54
+
+    (35) strong -> STRONGOPEN inline . STRONGCLOSE
+    (23) inline -> inline . PLAIN
+    (24) inline -> inline . strong
+    (25) inline -> inline . italic
+    (26) inline -> inline . inline-code
+    (27) inline -> inline . named-link
+    (28) inline -> inline . auto-link
+    (29) inline -> inline . image
+    (35) strong -> . STRONGOPEN inline STRONGCLOSE
+    (36) italic -> . ITALICOPEN inline ITALICCLOSE
+    (40) inline-code -> . ICOPEN inline ICCLOSE
+    (37) named-link -> . LSBRC PLAIN RSBRC LBRC PLAIN RBRC
+    (39) auto-link -> . ALOPEN PLAIN ALCLOSE
+    (38) image -> . QLSBRC PLAIN RSBRC LBRC PLAIN RBRC
+
+    STRONGCLOSE     shift and go to state 62
+    PLAIN           shift and go to state 33
+    STRONGOPEN      shift and go to state 37
+    ITALICOPEN      shift and go to state 35
+    ICOPEN          shift and go to state 32
+    LSBRC           shift and go to state 36
+    ALOPEN          shift and go to state 41
+    QLSBRC          shift and go to state 29
+
+    named-link                     shift and go to state 30
+    auto-link                      shift and go to state 31
+    image                          shift and go to state 34
+    italic                         shift and go to state 38
+    strong                         shift and go to state 39
+    inline-code                    shift and go to state 40
+
+state 55
+
+    (39) auto-link -> ALOPEN PLAIN . ALCLOSE
+
+    ALCLOSE         shift and go to state 63
+
+
+state 56
+
+    (31) h1 -> H1OPEN PLAIN H1CLOSE .
+
+    BLOCKDIV        reduce using rule 31 (h1 -> H1OPEN PLAIN H1CLOSE .)
+    H1OPEN          reduce using rule 31 (h1 -> H1OPEN PLAIN H1CLOSE .)
+    H2OPEN          reduce using rule 31 (h1 -> H1OPEN PLAIN H1CLOSE .)
+    H3OPEN          reduce using rule 31 (h1 -> H1OPEN PLAIN H1CLOSE .)
+    HR              reduce using rule 31 (h1 -> H1OPEN PLAIN H1CLOSE .)
+    BLOCKCODEOPEN   reduce using rule 31 (h1 -> H1OPEN PLAIN H1CLOSE .)
+    LI              reduce using rule 31 (h1 -> H1OPEN PLAIN H1CLOSE .)
+    QUOTELINE       reduce using rule 31 (h1 -> H1OPEN PLAIN H1CLOSE .)
+    PLAIN           reduce using rule 31 (h1 -> H1OPEN PLAIN H1CLOSE .)
+    STRONGOPEN      reduce using rule 31 (h1 -> H1OPEN PLAIN H1CLOSE .)
+    ITALICOPEN      reduce using rule 31 (h1 -> H1OPEN PLAIN H1CLOSE .)
+    ICOPEN          reduce using rule 31 (h1 -> H1OPEN PLAIN H1CLOSE .)
+    LSBRC           reduce using rule 31 (h1 -> H1OPEN PLAIN H1CLOSE .)
+    ALOPEN          reduce using rule 31 (h1 -> H1OPEN PLAIN H1CLOSE .)
+    QLSBRC          reduce using rule 31 (h1 -> H1OPEN PLAIN H1CLOSE .)
+    $end            reduce using rule 31 (h1 -> H1OPEN PLAIN H1CLOSE .)
+
+
+state 57
+
+    (12) blockcode -> BLOCKCODEOPEN PLAIN BLOCKCODECLOSE .
+
+    BLOCKDIV        reduce using rule 12 (blockcode -> BLOCKCODEOPEN PLAIN BLOCKCODECLOSE .)
+    H1OPEN          reduce using rule 12 (blockcode -> BLOCKCODEOPEN PLAIN BLOCKCODECLOSE .)
+    H2OPEN          reduce using rule 12 (blockcode -> BLOCKCODEOPEN PLAIN BLOCKCODECLOSE .)
+    H3OPEN          reduce using rule 12 (blockcode -> BLOCKCODEOPEN PLAIN BLOCKCODECLOSE .)
+    HR              reduce using rule 12 (blockcode -> BLOCKCODEOPEN PLAIN BLOCKCODECLOSE .)
+    BLOCKCODEOPEN   reduce using rule 12 (blockcode -> BLOCKCODEOPEN PLAIN BLOCKCODECLOSE .)
+    LI              reduce using rule 12 (blockcode -> BLOCKCODEOPEN PLAIN BLOCKCODECLOSE .)
+    QUOTELINE       reduce using rule 12 (blockcode -> BLOCKCODEOPEN PLAIN BLOCKCODECLOSE .)
+    PLAIN           reduce using rule 12 (blockcode -> BLOCKCODEOPEN PLAIN BLOCKCODECLOSE .)
+    STRONGOPEN      reduce using rule 12 (blockcode -> BLOCKCODEOPEN PLAIN BLOCKCODECLOSE .)
+    ITALICOPEN      reduce using rule 12 (blockcode -> BLOCKCODEOPEN PLAIN BLOCKCODECLOSE .)
+    ICOPEN          reduce using rule 12 (blockcode -> BLOCKCODEOPEN PLAIN BLOCKCODECLOSE .)
+    LSBRC           reduce using rule 12 (blockcode -> BLOCKCODEOPEN PLAIN BLOCKCODECLOSE .)
+    ALOPEN          reduce using rule 12 (blockcode -> BLOCKCODEOPEN PLAIN BLOCKCODECLOSE .)
+    QLSBRC          reduce using rule 12 (blockcode -> BLOCKCODEOPEN PLAIN BLOCKCODECLOSE .)
+    $end            reduce using rule 12 (blockcode -> BLOCKCODEOPEN PLAIN BLOCKCODECLOSE .)
+
+
+state 58
+
+    (38) image -> QLSBRC PLAIN RSBRC . LBRC PLAIN RBRC
+
+    LBRC            shift and go to state 64
+
+
+state 59
+
+    (40) inline-code -> ICOPEN inline ICCLOSE .
+
+    STRONGCLOSE     reduce using rule 40 (inline-code -> ICOPEN inline ICCLOSE .)
+    PLAIN           reduce using rule 40 (inline-code -> ICOPEN inline ICCLOSE .)
+    STRONGOPEN      reduce using rule 40 (inline-code -> ICOPEN inline ICCLOSE .)
+    ITALICOPEN      reduce using rule 40 (inline-code -> ICOPEN inline ICCLOSE .)
+    ICOPEN          reduce using rule 40 (inline-code -> ICOPEN inline ICCLOSE .)
+    LSBRC           reduce using rule 40 (inline-code -> ICOPEN inline ICCLOSE .)
+    ALOPEN          reduce using rule 40 (inline-code -> ICOPEN inline ICCLOSE .)
+    QLSBRC          reduce using rule 40 (inline-code -> ICOPEN inline ICCLOSE .)
+    ICCLOSE         reduce using rule 40 (inline-code -> ICOPEN inline ICCLOSE .)
+    BLOCKDIV        reduce using rule 40 (inline-code -> ICOPEN inline ICCLOSE .)
+    H1OPEN          reduce using rule 40 (inline-code -> ICOPEN inline ICCLOSE .)
+    H2OPEN          reduce using rule 40 (inline-code -> ICOPEN inline ICCLOSE .)
+    H3OPEN          reduce using rule 40 (inline-code -> ICOPEN inline ICCLOSE .)
+    HR              reduce using rule 40 (inline-code -> ICOPEN inline ICCLOSE .)
+    BLOCKCODEOPEN   reduce using rule 40 (inline-code -> ICOPEN inline ICCLOSE .)
+    LI              reduce using rule 40 (inline-code -> ICOPEN inline ICCLOSE .)
+    QUOTELINE       reduce using rule 40 (inline-code -> ICOPEN inline ICCLOSE .)
+    $end            reduce using rule 40 (inline-code -> ICOPEN inline ICCLOSE .)
+    ITALICCLOSE     reduce using rule 40 (inline-code -> ICOPEN inline ICCLOSE .)
+    NEWL            reduce using rule 40 (inline-code -> ICOPEN inline ICCLOSE .)
+
+
+state 60
+
+    (36) italic -> ITALICOPEN inline ITALICCLOSE .
+
+    PLAIN           reduce using rule 36 (italic -> ITALICOPEN inline ITALICCLOSE .)
+    STRONGOPEN      reduce using rule 36 (italic -> ITALICOPEN inline ITALICCLOSE .)
+    ITALICOPEN      reduce using rule 36 (italic -> ITALICOPEN inline ITALICCLOSE .)
+    ICOPEN          reduce using rule 36 (italic -> ITALICOPEN inline ITALICCLOSE .)
+    LSBRC           reduce using rule 36 (italic -> ITALICOPEN inline ITALICCLOSE .)
+    ALOPEN          reduce using rule 36 (italic -> ITALICOPEN inline ITALICCLOSE .)
+    QLSBRC          reduce using rule 36 (italic -> ITALICOPEN inline ITALICCLOSE .)
+    BLOCKDIV        reduce using rule 36 (italic -> ITALICOPEN inline ITALICCLOSE .)
+    H1OPEN          reduce using rule 36 (italic -> ITALICOPEN inline ITALICCLOSE .)
+    H2OPEN          reduce using rule 36 (italic -> ITALICOPEN inline ITALICCLOSE .)
+    H3OPEN          reduce using rule 36 (italic -> ITALICOPEN inline ITALICCLOSE .)
+    HR              reduce using rule 36 (italic -> ITALICOPEN inline ITALICCLOSE .)
+    BLOCKCODEOPEN   reduce using rule 36 (italic -> ITALICOPEN inline ITALICCLOSE .)
+    LI              reduce using rule 36 (italic -> ITALICOPEN inline ITALICCLOSE .)
+    QUOTELINE       reduce using rule 36 (italic -> ITALICOPEN inline ITALICCLOSE .)
+    $end            reduce using rule 36 (italic -> ITALICOPEN inline ITALICCLOSE .)
+    ICCLOSE         reduce using rule 36 (italic -> ITALICOPEN inline ITALICCLOSE .)
+    NEWL            reduce using rule 36 (italic -> ITALICOPEN inline ITALICCLOSE .)
+    ITALICCLOSE     reduce using rule 36 (italic -> ITALICOPEN inline ITALICCLOSE .)
+    STRONGCLOSE     reduce using rule 36 (italic -> ITALICOPEN inline ITALICCLOSE .)
+
+
+state 61
+
+    (37) named-link -> LSBRC PLAIN RSBRC . LBRC PLAIN RBRC
+
+    LBRC            shift and go to state 65
+
+
+state 62
+
+    (35) strong -> STRONGOPEN inline STRONGCLOSE .
+
+    STRONGCLOSE     reduce using rule 35 (strong -> STRONGOPEN inline STRONGCLOSE .)
+    PLAIN           reduce using rule 35 (strong -> STRONGOPEN inline STRONGCLOSE .)
+    STRONGOPEN      reduce using rule 35 (strong -> STRONGOPEN inline STRONGCLOSE .)
+    ITALICOPEN      reduce using rule 35 (strong -> STRONGOPEN inline STRONGCLOSE .)
+    ICOPEN          reduce using rule 35 (strong -> STRONGOPEN inline STRONGCLOSE .)
+    LSBRC           reduce using rule 35 (strong -> STRONGOPEN inline STRONGCLOSE .)
+    ALOPEN          reduce using rule 35 (strong -> STRONGOPEN inline STRONGCLOSE .)
+    QLSBRC          reduce using rule 35 (strong -> STRONGOPEN inline STRONGCLOSE .)
+    ITALICCLOSE     reduce using rule 35 (strong -> STRONGOPEN inline STRONGCLOSE .)
+    BLOCKDIV        reduce using rule 35 (strong -> STRONGOPEN inline STRONGCLOSE .)
+    H1OPEN          reduce using rule 35 (strong -> STRONGOPEN inline STRONGCLOSE .)
+    H2OPEN          reduce using rule 35 (strong -> STRONGOPEN inline STRONGCLOSE .)
+    H3OPEN          reduce using rule 35 (strong -> STRONGOPEN inline STRONGCLOSE .)
+    HR              reduce using rule 35 (strong -> STRONGOPEN inline STRONGCLOSE .)
+    BLOCKCODEOPEN   reduce using rule 35 (strong -> STRONGOPEN inline STRONGCLOSE .)
+    LI              reduce using rule 35 (strong -> STRONGOPEN inline STRONGCLOSE .)
+    QUOTELINE       reduce using rule 35 (strong -> STRONGOPEN inline STRONGCLOSE .)
+    $end            reduce using rule 35 (strong -> STRONGOPEN inline STRONGCLOSE .)
+    ICCLOSE         reduce using rule 35 (strong -> STRONGOPEN inline STRONGCLOSE .)
+    NEWL            reduce using rule 35 (strong -> STRONGOPEN inline STRONGCLOSE .)
+
+
+state 63
+
+    (39) auto-link -> ALOPEN PLAIN ALCLOSE .
+
+    ICCLOSE         reduce using rule 39 (auto-link -> ALOPEN PLAIN ALCLOSE .)
+    PLAIN           reduce using rule 39 (auto-link -> ALOPEN PLAIN ALCLOSE .)
+    STRONGOPEN      reduce using rule 39 (auto-link -> ALOPEN PLAIN ALCLOSE .)
+    ITALICOPEN      reduce using rule 39 (auto-link -> ALOPEN PLAIN ALCLOSE .)
+    ICOPEN          reduce using rule 39 (auto-link -> ALOPEN PLAIN ALCLOSE .)
+    LSBRC           reduce using rule 39 (auto-link -> ALOPEN PLAIN ALCLOSE .)
+    ALOPEN          reduce using rule 39 (auto-link -> ALOPEN PLAIN ALCLOSE .)
+    QLSBRC          reduce using rule 39 (auto-link -> ALOPEN PLAIN ALCLOSE .)
+    STRONGCLOSE     reduce using rule 39 (auto-link -> ALOPEN PLAIN ALCLOSE .)
+    ITALICCLOSE     reduce using rule 39 (auto-link -> ALOPEN PLAIN ALCLOSE .)
+    NEWL            reduce using rule 39 (auto-link -> ALOPEN PLAIN ALCLOSE .)
+    BLOCKDIV        reduce using rule 39 (auto-link -> ALOPEN PLAIN ALCLOSE .)
+    QUOTELINE       reduce using rule 39 (auto-link -> ALOPEN PLAIN ALCLOSE .)
+    H1OPEN          reduce using rule 39 (auto-link -> ALOPEN PLAIN ALCLOSE .)
+    H2OPEN          reduce using rule 39 (auto-link -> ALOPEN PLAIN ALCLOSE .)
+    H3OPEN          reduce using rule 39 (auto-link -> ALOPEN PLAIN ALCLOSE .)
+    HR              reduce using rule 39 (auto-link -> ALOPEN PLAIN ALCLOSE .)
+    BLOCKCODEOPEN   reduce using rule 39 (auto-link -> ALOPEN PLAIN ALCLOSE .)
+    LI              reduce using rule 39 (auto-link -> ALOPEN PLAIN ALCLOSE .)
+    $end            reduce using rule 39 (auto-link -> ALOPEN PLAIN ALCLOSE .)
+
+
+state 64
+
+    (38) image -> QLSBRC PLAIN RSBRC LBRC . PLAIN RBRC
+
+    PLAIN           shift and go to state 66
+
+
+state 65
+
+    (37) named-link -> LSBRC PLAIN RSBRC LBRC . PLAIN RBRC
+
+    PLAIN           shift and go to state 67
+
+
+state 66
+
+    (38) image -> QLSBRC PLAIN RSBRC LBRC PLAIN . RBRC
+
+    RBRC            shift and go to state 68
+
+
+state 67
+
+    (37) named-link -> LSBRC PLAIN RSBRC LBRC PLAIN . RBRC
+
+    RBRC            shift and go to state 69
+
+
+state 68
+
+    (38) image -> QLSBRC PLAIN RSBRC LBRC PLAIN RBRC .
+
+    ICCLOSE         reduce using rule 38 (image -> QLSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    PLAIN           reduce using rule 38 (image -> QLSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    STRONGOPEN      reduce using rule 38 (image -> QLSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    ITALICOPEN      reduce using rule 38 (image -> QLSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    ICOPEN          reduce using rule 38 (image -> QLSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    LSBRC           reduce using rule 38 (image -> QLSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    ALOPEN          reduce using rule 38 (image -> QLSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    QLSBRC          reduce using rule 38 (image -> QLSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    BLOCKDIV        reduce using rule 38 (image -> QLSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    H1OPEN          reduce using rule 38 (image -> QLSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    H2OPEN          reduce using rule 38 (image -> QLSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    H3OPEN          reduce using rule 38 (image -> QLSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    HR              reduce using rule 38 (image -> QLSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    BLOCKCODEOPEN   reduce using rule 38 (image -> QLSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    LI              reduce using rule 38 (image -> QLSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    QUOTELINE       reduce using rule 38 (image -> QLSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    $end            reduce using rule 38 (image -> QLSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    NEWL            reduce using rule 38 (image -> QLSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    STRONGCLOSE     reduce using rule 38 (image -> QLSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    ITALICCLOSE     reduce using rule 38 (image -> QLSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+
+
+state 69
+
+    (37) named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC .
+
+    ICCLOSE         reduce using rule 37 (named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    PLAIN           reduce using rule 37 (named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    STRONGOPEN      reduce using rule 37 (named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    ITALICOPEN      reduce using rule 37 (named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    ICOPEN          reduce using rule 37 (named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    LSBRC           reduce using rule 37 (named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    ALOPEN          reduce using rule 37 (named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    QLSBRC          reduce using rule 37 (named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    BLOCKDIV        reduce using rule 37 (named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    H1OPEN          reduce using rule 37 (named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    H2OPEN          reduce using rule 37 (named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    H3OPEN          reduce using rule 37 (named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    HR              reduce using rule 37 (named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    BLOCKCODEOPEN   reduce using rule 37 (named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    LI              reduce using rule 37 (named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    QUOTELINE       reduce using rule 37 (named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    $end            reduce using rule 37 (named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    ITALICCLOSE     reduce using rule 37 (named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    NEWL            reduce using rule 37 (named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
+    STRONGCLOSE     reduce using rule 37 (named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC .)
 
 WARNING: 
 WARNING: Conflicts:
@@ -993,22 +1615,29 @@ WARNING: shift/reduce conflict for H1OPEN in state 0 resolved as shift
 WARNING: shift/reduce conflict for H2OPEN in state 0 resolved as shift
 WARNING: shift/reduce conflict for H3OPEN in state 0 resolved as shift
 WARNING: shift/reduce conflict for HR in state 0 resolved as shift
+WARNING: shift/reduce conflict for BLOCKCODEOPEN in state 0 resolved as shift
 WARNING: shift/reduce conflict for LI in state 0 resolved as shift
-WARNING: shift/reduce conflict for PLAIN in state 12 resolved as shift
-WARNING: shift/reduce conflict for STRONGOPEN in state 12 resolved as shift
-WARNING: shift/reduce conflict for ITALICOPEN in state 12 resolved as shift
-WARNING: shift/reduce conflict for ICOPEN in state 12 resolved as shift
-WARNING: shift/reduce conflict for LSBRC in state 12 resolved as shift
-WARNING: shift/reduce conflict for ALOPEN in state 12 resolved as shift
-WARNING: shift/reduce conflict for BLOCKDIV in state 17 resolved as shift
-WARNING: shift/reduce conflict for H1OPEN in state 17 resolved as shift
-WARNING: shift/reduce conflict for H2OPEN in state 17 resolved as shift
-WARNING: shift/reduce conflict for H3OPEN in state 17 resolved as shift
-WARNING: shift/reduce conflict for HR in state 17 resolved as shift
-WARNING: shift/reduce conflict for LI in state 17 resolved as shift
+WARNING: shift/reduce conflict for QUOTELINE in state 0 resolved as shift
+WARNING: shift/reduce conflict for PLAIN in state 16 resolved as shift
+WARNING: shift/reduce conflict for STRONGOPEN in state 16 resolved as shift
+WARNING: shift/reduce conflict for ITALICOPEN in state 16 resolved as shift
+WARNING: shift/reduce conflict for ICOPEN in state 16 resolved as shift
+WARNING: shift/reduce conflict for LSBRC in state 16 resolved as shift
+WARNING: shift/reduce conflict for ALOPEN in state 16 resolved as shift
+WARNING: shift/reduce conflict for QLSBRC in state 16 resolved as shift
+WARNING: shift/reduce conflict for BLOCKDIV in state 23 resolved as shift
+WARNING: shift/reduce conflict for H1OPEN in state 23 resolved as shift
+WARNING: shift/reduce conflict for H2OPEN in state 23 resolved as shift
+WARNING: shift/reduce conflict for H3OPEN in state 23 resolved as shift
+WARNING: shift/reduce conflict for HR in state 23 resolved as shift
+WARNING: shift/reduce conflict for BLOCKCODEOPEN in state 23 resolved as shift
+WARNING: shift/reduce conflict for LI in state 23 resolved as shift
+WARNING: shift/reduce conflict for QUOTELINE in state 23 resolved as shift
 WARNING: reduce/reduce conflict in state 0 resolved using rule (article -> <empty>)
 WARNING: rejected rule (inline -> <empty>) in state 0
-WARNING: reduce/reduce conflict in state 9 resolved using rule (block -> BLOCKDIV)
-WARNING: rejected rule (list-items -> BLOCKDIV) in state 9
-WARNING: reduce/reduce conflict in state 17 resolved using rule (article -> <empty>)
-WARNING: rejected rule (inline -> <empty>) in state 17
+WARNING: reduce/reduce conflict in state 12 resolved using rule (block -> BLOCKDIV)
+WARNING: rejected rule (list-items -> BLOCKDIV) in state 12
+WARNING: reduce/reduce conflict in state 12 resolved using rule (block -> BLOCKDIV)
+WARNING: rejected rule (quotelines -> BLOCKDIV) in state 12
+WARNING: reduce/reduce conflict in state 23 resolved using rule (article -> <empty>)
+WARNING: rejected rule (inline -> <empty>) in state 23
