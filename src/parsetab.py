@@ -5,9 +5,9 @@ _tabversion = '3.2'
 
 _lr_method = 'LALR'
 
-_lr_signature = '\x80\xc1\xab\xc8\x11\x05\xf3\xfd\x0e\x94|LJ\xd8\xebK'
+_lr_signature = '\xeb\x9d\x16\x12\xcf\xd4Z\xb6\xbe\x1e\x80\xd6\x07\xd5\\\x0c'
     
-_lr_action_items = {'PLAIN':([2,4,],[8,9,]),'H1OPEN':([0,1,3,5,6,10,11,],[-2,2,-4,-3,-1,-6,-7,]),'H2OPEN':([0,1,3,5,6,10,11,],[-2,4,-4,-3,-1,-6,-7,]),'H1CLOSE':([7,8,],[10,-5,]),'H2CLOSE':([9,],[11,]),'$end':([0,1,3,5,6,10,11,],[-2,0,-4,-3,-1,-6,-7,]),}
+_lr_action_items = {'PLAIN':([0,1,2,3,4,5,6,7,8,9,10,13,14,],[-2,10,10,-4,12,-3,-6,-5,-7,-1,-8,-9,-10,]),'H1OPEN':([0,1,3,5,6,7,8,9,10,13,14,],[-2,2,-4,-3,-6,-5,-7,-1,-8,-9,-10,]),'H2OPEN':([0,1,3,5,6,7,8,9,10,13,14,],[-2,4,-4,-3,-6,-5,-7,-1,-8,-9,-10,]),'H1CLOSE':([10,11,],[-8,13,]),'EMPTYLINES':([0,1,3,5,6,7,8,9,10,13,14,],[-2,6,-4,-3,-6,-5,-7,-1,-8,-9,-10,]),'H2CLOSE':([12,],[14,]),'$end':([0,1,3,5,6,7,8,9,10,13,14,],[-2,0,-4,-3,-6,-5,-7,-1,-8,-9,-10,]),}
 
 _lr_action = { }
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'h2':([1,],[3,]),'article':([0,],[1,]),'h1':([1,],[5,]),'block':([1,],[6,]),'inline':([2,],[7,]),}
+_lr_goto_items = {'h2':([1,],[3,]),'h1':([1,],[5,]),'paragraph':([1,],[7,]),'inline':([1,2,],[8,11,]),'article':([0,],[1,]),'block':([1,],[9,]),}
 
 _lr_goto = { }
 for _k, _v in _lr_goto_items.items():
@@ -30,7 +30,10 @@ _lr_productions = [
   ('article -> <empty>','article',0,'p_article_empty','/Users/leapoahead/Code/cp-project/src/parser.py',14),
   ('block -> h1','block',1,'p_block_h1','/Users/leapoahead/Code/cp-project/src/parser.py',23),
   ('block -> h2','block',1,'p_block_h2','/Users/leapoahead/Code/cp-project/src/parser.py',27),
-  ('inline -> PLAIN','inline',1,'p_inline_plain','/Users/leapoahead/Code/cp-project/src/parser.py',34),
-  ('h1 -> H1OPEN inline H1CLOSE','h1',3,'p_h1','/Users/leapoahead/Code/cp-project/src/parser.py',41),
-  ('h2 -> H2OPEN PLAIN H2CLOSE','h2',3,'p_h2','/Users/leapoahead/Code/cp-project/src/parser.py',48),
+  ('block -> paragraph','block',1,'p_block_paragraph','/Users/leapoahead/Code/cp-project/src/parser.py',31),
+  ('block -> EMPTYLINES','block',1,'p_block_emptylines','/Users/leapoahead/Code/cp-project/src/parser.py',35),
+  ('paragraph -> inline','paragraph',1,'p_paragraph','/Users/leapoahead/Code/cp-project/src/parser.py',42),
+  ('inline -> PLAIN','inline',1,'p_inline_plain','/Users/leapoahead/Code/cp-project/src/parser.py',49),
+  ('h1 -> H1OPEN inline H1CLOSE','h1',3,'p_h1','/Users/leapoahead/Code/cp-project/src/parser.py',56),
+  ('h2 -> H2OPEN PLAIN H2CLOSE','h2',3,'p_h2','/Users/leapoahead/Code/cp-project/src/parser.py',63),
 ]

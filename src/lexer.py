@@ -5,7 +5,8 @@ tokens = (
     'H1CLOSE',
     'H2OPEN',
     'H2CLOSE',
-    'PLAIN'
+    'PLAIN',
+    'EMPTYLINES'
     )
 
 states = (
@@ -19,6 +20,10 @@ def t_ANY_PLAIN(t):
   return t
 
 # INITIAL state
+def t_EMPTYLINES(t):
+  r'\n+'
+  return t
+
 def t_H2OPEN(t):
   r'\#{2}'
   t.lexer.push_state('h2')
@@ -32,13 +37,13 @@ def t_H1OPEN(t):
 
 # h1 state
 def t_h1_H1CLOSE(t):
-  r'\n+'
+  r'\n'
   t.lexer.pop_state()
   return t
 
 # h2 state
 def t_h2_H2CLOSE(t):
-  r'\n+'
+  r'\n'
   t.lexer.pop_state()
   return t
 
@@ -47,3 +52,14 @@ def t_ANY_error(t):
   print 'Token not identified: %s' % t
 
 lexer = lex.lex()
+
+'''
+infile = open('prac/in1.md', 'r')
+raw_content = infile.read()
+lexer.input(raw_content)
+while True:
+    token = lexer.token()
+    if not token:
+        break
+    print token
+'''

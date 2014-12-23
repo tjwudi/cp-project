@@ -27,6 +27,21 @@ def p_block_h2(p):
   'block : h2'
   p[0] = p[1]
 
+def p_block_paragraph(p):
+  'block : paragraph'
+  p[0] = p[1]
+
+def p_block_emptylines(p):
+  'block : EMPTYLINES'
+  p[0] = ""
+
+#
+# paragraph
+#
+def p_paragraph(p):
+  'paragraph : inline'
+  p[0] = '<p>%s</p>' % p[1]
+
 #
 # Inline
 #
@@ -48,6 +63,11 @@ def p_h2(p):
   'h2 : H2OPEN PLAIN H2CLOSE'
   p[0] = '<h2>%s</h2>' % p[2].strip()
 
+#
+# Error handling
+#
+def p_error(p):
+  print 'Syntax error: %s' % p
 
 parser = yacc.yacc()
 infile = open('prac/in1.md', 'r')

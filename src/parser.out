@@ -7,17 +7,21 @@ Rule 1     article -> article block
 Rule 2     article -> <empty>
 Rule 3     block -> h1
 Rule 4     block -> h2
-Rule 5     inline -> PLAIN
-Rule 6     h1 -> H1OPEN inline H1CLOSE
-Rule 7     h2 -> H2OPEN PLAIN H2CLOSE
+Rule 5     block -> paragraph
+Rule 6     block -> EMPTYLINES
+Rule 7     paragraph -> inline
+Rule 8     inline -> PLAIN
+Rule 9     h1 -> H1OPEN inline H1CLOSE
+Rule 10    h2 -> H2OPEN PLAIN H2CLOSE
 
 Terminals, with rules where they appear
 
-H1CLOSE              : 6
-H1OPEN               : 6
-H2CLOSE              : 7
-H2OPEN               : 7
-PLAIN                : 5 7
+EMPTYLINES           : 6
+H1CLOSE              : 9
+H1OPEN               : 9
+H2CLOSE              : 10
+H2OPEN               : 10
+PLAIN                : 8 10
 error                : 
 
 Nonterminals, with rules where they appear
@@ -26,7 +30,8 @@ article              : 1 0
 block                : 1
 h1                   : 3
 h2                   : 4
-inline               : 6
+inline               : 7 9
+paragraph            : 5
 
 Parsing method: LALR
 
@@ -36,8 +41,10 @@ state 0
     (1) article -> . article block
     (2) article -> .
 
+    EMPTYLINES      reduce using rule 2 (article -> .)
     H1OPEN          reduce using rule 2 (article -> .)
     H2OPEN          reduce using rule 2 (article -> .)
+    PLAIN           reduce using rule 2 (article -> .)
     $end            reduce using rule 2 (article -> .)
 
     article                        shift and go to state 1
@@ -48,94 +55,150 @@ state 1
     (1) article -> article . block
     (3) block -> . h1
     (4) block -> . h2
-    (6) h1 -> . H1OPEN inline H1CLOSE
-    (7) h2 -> . H2OPEN PLAIN H2CLOSE
+    (5) block -> . paragraph
+    (6) block -> . EMPTYLINES
+    (9) h1 -> . H1OPEN inline H1CLOSE
+    (10) h2 -> . H2OPEN PLAIN H2CLOSE
+    (7) paragraph -> . inline
+    (8) inline -> . PLAIN
 
+    EMPTYLINES      shift and go to state 6
     H1OPEN          shift and go to state 2
     H2OPEN          shift and go to state 4
+    PLAIN           shift and go to state 10
 
     h2                             shift and go to state 3
     h1                             shift and go to state 5
-    block                          shift and go to state 6
+    paragraph                      shift and go to state 7
+    inline                         shift and go to state 8
+    block                          shift and go to state 9
 
 state 2
 
-    (6) h1 -> H1OPEN . inline H1CLOSE
-    (5) inline -> . PLAIN
+    (9) h1 -> H1OPEN . inline H1CLOSE
+    (8) inline -> . PLAIN
 
-    PLAIN           shift and go to state 8
+    PLAIN           shift and go to state 10
 
-    inline                         shift and go to state 7
+    inline                         shift and go to state 11
 
 state 3
 
     (4) block -> h2 .
 
+    EMPTYLINES      reduce using rule 4 (block -> h2 .)
     H1OPEN          reduce using rule 4 (block -> h2 .)
     H2OPEN          reduce using rule 4 (block -> h2 .)
+    PLAIN           reduce using rule 4 (block -> h2 .)
     $end            reduce using rule 4 (block -> h2 .)
 
 
 state 4
 
-    (7) h2 -> H2OPEN . PLAIN H2CLOSE
+    (10) h2 -> H2OPEN . PLAIN H2CLOSE
 
-    PLAIN           shift and go to state 9
+    PLAIN           shift and go to state 12
 
 
 state 5
 
     (3) block -> h1 .
 
+    EMPTYLINES      reduce using rule 3 (block -> h1 .)
     H1OPEN          reduce using rule 3 (block -> h1 .)
     H2OPEN          reduce using rule 3 (block -> h1 .)
+    PLAIN           reduce using rule 3 (block -> h1 .)
     $end            reduce using rule 3 (block -> h1 .)
 
 
 state 6
 
-    (1) article -> article block .
+    (6) block -> EMPTYLINES .
 
-    H1OPEN          reduce using rule 1 (article -> article block .)
-    H2OPEN          reduce using rule 1 (article -> article block .)
-    $end            reduce using rule 1 (article -> article block .)
+    EMPTYLINES      reduce using rule 6 (block -> EMPTYLINES .)
+    H1OPEN          reduce using rule 6 (block -> EMPTYLINES .)
+    H2OPEN          reduce using rule 6 (block -> EMPTYLINES .)
+    PLAIN           reduce using rule 6 (block -> EMPTYLINES .)
+    $end            reduce using rule 6 (block -> EMPTYLINES .)
 
 
 state 7
 
-    (6) h1 -> H1OPEN inline . H1CLOSE
+    (5) block -> paragraph .
 
-    H1CLOSE         shift and go to state 10
+    EMPTYLINES      reduce using rule 5 (block -> paragraph .)
+    H1OPEN          reduce using rule 5 (block -> paragraph .)
+    H2OPEN          reduce using rule 5 (block -> paragraph .)
+    PLAIN           reduce using rule 5 (block -> paragraph .)
+    $end            reduce using rule 5 (block -> paragraph .)
 
 
 state 8
 
-    (5) inline -> PLAIN .
+    (7) paragraph -> inline .
 
-    H1CLOSE         reduce using rule 5 (inline -> PLAIN .)
+    EMPTYLINES      reduce using rule 7 (paragraph -> inline .)
+    H1OPEN          reduce using rule 7 (paragraph -> inline .)
+    H2OPEN          reduce using rule 7 (paragraph -> inline .)
+    PLAIN           reduce using rule 7 (paragraph -> inline .)
+    $end            reduce using rule 7 (paragraph -> inline .)
 
 
 state 9
 
-    (7) h2 -> H2OPEN PLAIN . H2CLOSE
+    (1) article -> article block .
 
-    H2CLOSE         shift and go to state 11
+    EMPTYLINES      reduce using rule 1 (article -> article block .)
+    H1OPEN          reduce using rule 1 (article -> article block .)
+    H2OPEN          reduce using rule 1 (article -> article block .)
+    PLAIN           reduce using rule 1 (article -> article block .)
+    $end            reduce using rule 1 (article -> article block .)
 
 
 state 10
 
-    (6) h1 -> H1OPEN inline H1CLOSE .
+    (8) inline -> PLAIN .
 
-    H1OPEN          reduce using rule 6 (h1 -> H1OPEN inline H1CLOSE .)
-    H2OPEN          reduce using rule 6 (h1 -> H1OPEN inline H1CLOSE .)
-    $end            reduce using rule 6 (h1 -> H1OPEN inline H1CLOSE .)
+    EMPTYLINES      reduce using rule 8 (inline -> PLAIN .)
+    H1OPEN          reduce using rule 8 (inline -> PLAIN .)
+    H2OPEN          reduce using rule 8 (inline -> PLAIN .)
+    PLAIN           reduce using rule 8 (inline -> PLAIN .)
+    $end            reduce using rule 8 (inline -> PLAIN .)
+    H1CLOSE         reduce using rule 8 (inline -> PLAIN .)
 
 
 state 11
 
-    (7) h2 -> H2OPEN PLAIN H2CLOSE .
+    (9) h1 -> H1OPEN inline . H1CLOSE
 
-    H1OPEN          reduce using rule 7 (h2 -> H2OPEN PLAIN H2CLOSE .)
-    H2OPEN          reduce using rule 7 (h2 -> H2OPEN PLAIN H2CLOSE .)
-    $end            reduce using rule 7 (h2 -> H2OPEN PLAIN H2CLOSE .)
+    H1CLOSE         shift and go to state 13
+
+
+state 12
+
+    (10) h2 -> H2OPEN PLAIN . H2CLOSE
+
+    H2CLOSE         shift and go to state 14
+
+
+state 13
+
+    (9) h1 -> H1OPEN inline H1CLOSE .
+
+    EMPTYLINES      reduce using rule 9 (h1 -> H1OPEN inline H1CLOSE .)
+    H1OPEN          reduce using rule 9 (h1 -> H1OPEN inline H1CLOSE .)
+    H2OPEN          reduce using rule 9 (h1 -> H1OPEN inline H1CLOSE .)
+    PLAIN           reduce using rule 9 (h1 -> H1OPEN inline H1CLOSE .)
+    $end            reduce using rule 9 (h1 -> H1OPEN inline H1CLOSE .)
+
+
+state 14
+
+    (10) h2 -> H2OPEN PLAIN H2CLOSE .
+
+    EMPTYLINES      reduce using rule 10 (h2 -> H2OPEN PLAIN H2CLOSE .)
+    H1OPEN          reduce using rule 10 (h2 -> H2OPEN PLAIN H2CLOSE .)
+    H2OPEN          reduce using rule 10 (h2 -> H2OPEN PLAIN H2CLOSE .)
+    PLAIN           reduce using rule 10 (h2 -> H2OPEN PLAIN H2CLOSE .)
+    $end            reduce using rule 10 (h2 -> H2OPEN PLAIN H2CLOSE .)
 
