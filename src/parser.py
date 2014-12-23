@@ -27,6 +27,7 @@ def p_block(p):
         | h2
         | h3
         | hr
+        | block-list
         | paragraph
   '''
   p[0] = p[1]
@@ -40,6 +41,29 @@ def p_paragraph(p):
   p[0] = '<p>%s</p>' % p[1]
 
 #
+# list
+# 
+def p_list(p):
+  'block-list : list-items'
+  p[0] = '<ul>%s</ul>' % p[1]
+
+def p_list_items(p):
+  '''
+  list-items : list-item list-items
+              | BLOCKDIV
+  '''
+  if len(p) > 2:
+    p[0] = p[1] + p[2] 
+  else:
+    p[0] = ''
+
+def p_list_item(p):
+  'list-item : LI'
+  p[0] = '<li>%s</li>' % p[1][1]
+
+
+
+#
 # Inline
 #
 
@@ -49,6 +73,8 @@ def p_inline(p):
          | inline strong
          | inline italic
          | inline inline-code
+         | inline named-link
+         | inline auto-link
   '''
   p[0] = p[1] + p[2]
 
@@ -101,6 +127,20 @@ def p_italic(p):
   p[0] = '<i>%s</i>' % p[2]
 
 #
+# named-link
+#
+def p_named_link(p):
+  'named-link : LSBRC PLAIN RSBRC LBRC PLAIN RBRC'
+  p[0] = '<a href="%s">%s</a>' % (p[5], p[2])
+
+#
+# auto link
+#
+def p_auto_link(p):
+  'auto-link : ALOPEN PLAIN ALCLOSE'
+  p[0] = '<a href="%s">%s</a>' % (p[2], p[2])
+
+#
 # inline code
 #
 def p_inline_code(p):
@@ -114,7 +154,7 @@ def p_error(p):
   print 'Syntax error: %s' % p
 
 parser = yacc.yacc()
-infile = open('../inputs/input1.md', 'r')
+infile = open('../inputs/input2.md', 'r')
 raw_content = infile.read()
 compiled_content = parser.parse(raw_content)
 

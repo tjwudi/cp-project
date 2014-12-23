@@ -9,27 +9,19 @@
 
 these must be  **comfortable shoes**, i bet you cloud walk all day in _shoes_ like that and not feel a thing.i wish i have [shoes](http://www.taobao.com/) like that. 
 	
-my `mama` always said there’s an awful lot you can tell about a person by their shoes.where they're gone, where they've *been*.
+my `mama` always said there's an awful lot you can tell about a person by their shoes.where they're gone, where they've *been*.
 
 ## REVIEWS
 
 <http://www.github.com/guoylyy/>
 
-* i like this film.
+* Hello, world
 
----
-<http://www.github.com/guoylyy/>
+1. Hello, world
+2. Hello, X
 
-1. i wish jenny can marry with gump early.
 
-===
-
-<http://www.github.com/guoylyy/>
-
-+ i wish jenny can marry with gump early.
-
-* * *
-
++ Hello, world
 
 
 

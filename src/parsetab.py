@@ -5,9 +5,9 @@ _tabversion = '3.2'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'O(\xc8\xbb\xed\x96*\x0b;\xf5\xfd\xbfU`~d'
+_lr_signature = '\xde\xa3\xd2\xc7\xa6Wo\xf4\xb1s\x88\xac\xec-\xa2\xa4'
     
-_lr_action_items = {'ITALICOPEN':([0,3,4,5,6,7,9,10,12,13,18,20,21,22,23,25,26,27,29,31,32,33,],[-14,-5,-6,-18,-4,-7,-8,17,-3,-14,-14,-10,-12,-11,-13,-15,-16,-17,17,-20,-19,-21,]),'STRONGOPEN':([0,3,4,5,6,7,9,10,12,13,18,20,21,22,23,25,26,27,29,31,32,33,],[-14,-5,-6,-18,-4,-7,-8,18,-3,-14,-14,-10,-12,-11,-13,-15,-16,-17,18,-20,-19,-21,]),'STRONGCLOSE':([18,20,21,22,23,29,31,32,33,],[-14,-10,-12,-11,-13,32,-20,-19,-21,]),'ITALICCLOSE':([28,],[31,]),'HR':([0,3,4,5,6,7,9,10,12,13,20,21,22,23,25,26,27,31,32,33,],[5,-5,-6,-18,-4,-7,-8,-9,-3,5,-10,-12,-11,-13,-15,-16,-17,-20,-19,-21,]),'H3OPEN':([0,3,4,5,6,7,9,10,12,13,20,21,22,23,25,26,27,31,32,33,],[8,-5,-6,-18,-4,-7,-8,-9,-3,8,-10,-12,-11,-13,-15,-16,-17,-20,-19,-21,]),'H1OPEN':([0,3,4,5,6,7,9,10,12,13,20,21,22,23,25,26,27,31,32,33,],[1,-5,-6,-18,-4,-7,-8,-9,-3,1,-10,-12,-11,-13,-15,-16,-17,-20,-19,-21,]),'H2OPEN':([0,3,4,5,6,7,9,10,12,13,20,21,22,23,25,26,27,31,32,33,],[2,-5,-6,-18,-4,-7,-8,-9,-3,2,-10,-12,-11,-13,-15,-16,-17,-20,-19,-21,]),'H1CLOSE':([14,],[25,]),'H3CLOSE':([16,],[27,]),'ICCLOSE':([30,],[33,]),'ICOPEN':([0,3,4,5,6,7,9,10,12,13,18,20,21,22,23,25,26,27,29,31,32,33,],[-14,-5,-6,-18,-4,-7,-8,19,-3,-14,-14,-10,-12,-11,-13,-15,-16,-17,19,-20,-19,-21,]),'PLAIN':([0,1,2,3,4,5,6,7,8,9,10,12,13,17,18,19,20,21,22,23,25,26,27,29,31,32,33,],[-14,14,15,-5,-6,-18,-4,-7,16,-8,20,-3,-14,28,-14,30,-10,-12,-11,-13,-15,-16,-17,20,-20,-19,-21,]),'H2CLOSE':([15,],[26,]),'BLOCKDIV':([0,3,4,5,6,7,9,10,12,13,20,21,22,23,25,26,27,31,32,33,],[12,-5,-6,-18,-4,-7,-8,-9,-3,12,-10,-12,-11,-13,-15,-16,-17,-20,-19,-21,]),'$end':([0,3,4,5,6,7,9,10,11,12,13,20,21,22,23,24,25,26,27,31,32,33,],[-2,-5,-6,-18,-4,-7,-8,-9,0,-3,-2,-10,-12,-11,-13,-1,-15,-16,-17,-20,-19,-21,]),}
+_lr_action_items = {'H1OPEN':([0,1,2,3,4,6,8,9,10,12,16,17,20,21,23,27,28,29,32,33,35,36,42,43,44,46,47,50,],[14,-5,-6,-4,-11,-8,-25,-3,-7,-10,-9,14,-19,-20,-15,-17,-16,-18,-13,-12,-23,-24,-22,-30,-27,-26,-29,-28,]),'HR':([0,1,2,3,4,6,8,9,10,12,16,17,20,21,23,27,28,29,32,33,35,36,42,43,44,46,47,50,],[8,-5,-6,-4,-11,-8,-25,-3,-7,-10,-9,8,-19,-20,-15,-17,-16,-18,-13,-12,-23,-24,-22,-30,-27,-26,-29,-28,]),'ICOPEN':([0,1,2,3,4,6,8,9,10,12,16,17,20,21,23,26,27,28,29,32,33,35,36,40,42,43,44,46,47,50,],[-21,-5,-6,-4,-11,-8,-25,-3,-7,22,-9,-21,-19,-20,-15,-21,-17,-16,-18,-13,-12,-23,-24,22,-22,-30,-27,-26,-29,-28,]),'ICCLOSE':([37,],[43,]),'LBRC':([45,],[48,]),'H2OPEN':([0,1,2,3,4,6,8,9,10,12,16,17,20,21,23,27,28,29,32,33,35,36,42,43,44,46,47,50,],[5,-5,-6,-4,-11,-8,-25,-3,-7,-10,-9,5,-19,-20,-15,-17,-16,-18,-13,-12,-23,-24,-22,-30,-27,-26,-29,-28,]),'RBRC':([49,],[50,]),'LI':([0,1,2,3,4,6,7,8,9,10,12,15,16,17,20,21,23,27,28,29,32,33,35,36,42,43,44,46,47,50,],[7,-5,-6,-4,-11,-8,-14,-25,-3,-7,-10,7,-9,7,-19,-20,-15,-17,-16,-18,-13,-12,-23,-24,-22,-30,-27,-26,-29,-28,]),'LSBRC':([0,1,2,3,4,6,8,9,10,12,16,17,20,21,23,26,27,28,29,32,33,35,36,40,42,43,44,46,47,50,],[-21,-5,-6,-4,-11,-8,-25,-3,-7,25,-9,-21,-19,-20,-15,-21,-17,-16,-18,-13,-12,-23,-24,25,-22,-30,-27,-26,-29,-28,]),'PLAIN':([0,1,2,3,4,5,6,8,9,10,11,12,14,16,17,20,21,22,23,24,25,26,27,28,29,30,32,33,35,36,40,42,43,44,46,47,48,50,],[-21,-5,-6,-4,-11,18,-8,-25,-3,-7,19,23,31,-9,-21,-19,-20,37,-15,38,39,-21,-17,-16,-18,41,-13,-12,-23,-24,23,-22,-30,-27,-26,-29,49,-28,]),'BLOCKDIV':([0,1,2,3,4,6,7,8,9,10,12,15,16,17,20,21,23,27,28,29,32,33,35,36,42,43,44,46,47,50,],[9,-5,-6,-4,-11,-8,-14,-25,-3,-7,-10,32,-9,9,-19,-20,-15,-17,-16,-18,-13,-12,-23,-24,-22,-30,-27,-26,-29,-28,]),'$end':([0,1,2,3,4,6,8,9,10,12,13,16,17,20,21,23,27,28,29,32,33,34,35,36,42,43,44,46,47,50,],[-2,-5,-6,-4,-11,-8,-25,-3,-7,-10,0,-9,-2,-19,-20,-15,-17,-16,-18,-13,-12,-1,-23,-24,-22,-30,-27,-26,-29,-28,]),'H3OPEN':([0,1,2,3,4,6,8,9,10,12,16,17,20,21,23,27,28,29,32,33,35,36,42,43,44,46,47,50,],[11,-5,-6,-4,-11,-8,-25,-3,-7,-10,-9,11,-19,-20,-15,-17,-16,-18,-13,-12,-23,-24,-22,-30,-27,-26,-29,-28,]),'H3CLOSE':([19,],[36,]),'ALCLOSE':([41,],[47,]),'H2CLOSE':([18,],[35,]),'ITALICOPEN':([0,1,2,3,4,6,8,9,10,12,16,17,20,21,23,26,27,28,29,32,33,35,36,40,42,43,44,46,47,50,],[-21,-5,-6,-4,-11,-8,-25,-3,-7,24,-9,-21,-19,-20,-15,-21,-17,-16,-18,-13,-12,-23,-24,24,-22,-30,-27,-26,-29,-28,]),'STRONGOPEN':([0,1,2,3,4,6,8,9,10,12,16,17,20,21,23,26,27,28,29,32,33,35,36,40,42,43,44,46,47,50,],[-21,-5,-6,-4,-11,-8,-25,-3,-7,26,-9,-21,-19,-20,-15,-21,-17,-16,-18,-13,-12,-23,-24,26,-22,-30,-27,-26,-29,-28,]),'STRONGCLOSE':([20,21,23,26,27,28,29,40,43,44,46,47,50,],[-19,-20,-15,-21,-17,-16,-18,46,-30,-27,-26,-29,-28,]),'ITALICCLOSE':([38,],[44,]),'H1CLOSE':([31,],[42,]),'RSBRC':([39,],[45,]),'ALOPEN':([0,1,2,3,4,6,8,9,10,12,16,17,20,21,23,26,27,28,29,32,33,35,36,40,42,43,44,46,47,50,],[-21,-5,-6,-4,-11,-8,-25,-3,-7,30,-9,-21,-19,-20,-15,-21,-17,-16,-18,-13,-12,-23,-24,30,-22,-30,-27,-26,-29,-28,]),}
 
 _lr_action = { }
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'h2':([0,13,],[3,3,]),'h3':([0,13,],[4,4,]),'h1':([0,13,],[6,6,]),'hr':([0,13,],[7,7,]),'paragraph':([0,13,],[9,9,]),'italic':([10,29,],[21,21,]),'inline':([0,13,18,],[10,10,29,]),'article':([0,13,],[11,24,]),'strong':([10,29,],[22,22,]),'inline-code':([10,29,],[23,23,]),'block':([0,13,],[13,13,]),}
+_lr_goto_items = {'named-link':([12,40,],[20,20,]),'strong':([12,40,],[28,28,]),'list-items':([0,15,17,],[4,33,4,]),'h2':([0,17,],[1,1,]),'h3':([0,17,],[2,2,]),'h1':([0,17,],[3,3,]),'block-list':([0,17,],[6,6,]),'hr':([0,17,],[10,10,]),'list-item':([0,15,17,],[15,15,15,]),'paragraph':([0,17,],[16,16,]),'italic':([12,40,],[27,27,]),'inline':([0,17,26,],[12,12,40,]),'article':([0,17,],[13,34,]),'auto-link':([12,40,],[21,21,]),'inline-code':([12,40,],[29,29,]),'block':([0,17,],[17,17,]),}
 
 _lr_goto = { }
 for _k, _v in _lr_goto_items.items():
@@ -33,18 +33,27 @@ _lr_productions = [
   ('block -> h2','block',1,'p_block','/Users/leapoahead/Code/cp-project/src/parser.py',27),
   ('block -> h3','block',1,'p_block','/Users/leapoahead/Code/cp-project/src/parser.py',28),
   ('block -> hr','block',1,'p_block','/Users/leapoahead/Code/cp-project/src/parser.py',29),
-  ('block -> paragraph','block',1,'p_block','/Users/leapoahead/Code/cp-project/src/parser.py',30),
-  ('paragraph -> inline','paragraph',1,'p_paragraph','/Users/leapoahead/Code/cp-project/src/parser.py',39),
-  ('inline -> inline PLAIN','inline',2,'p_inline','/Users/leapoahead/Code/cp-project/src/parser.py',48),
-  ('inline -> inline strong','inline',2,'p_inline','/Users/leapoahead/Code/cp-project/src/parser.py',49),
-  ('inline -> inline italic','inline',2,'p_inline','/Users/leapoahead/Code/cp-project/src/parser.py',50),
-  ('inline -> inline inline-code','inline',2,'p_inline','/Users/leapoahead/Code/cp-project/src/parser.py',51),
-  ('inline -> <empty>','inline',0,'p_inline_empty','/Users/leapoahead/Code/cp-project/src/parser.py',57),
-  ('h1 -> H1OPEN PLAIN H1CLOSE','h1',3,'p_h1','/Users/leapoahead/Code/cp-project/src/parser.py',65),
-  ('h2 -> H2OPEN PLAIN H2CLOSE','h2',3,'p_h2','/Users/leapoahead/Code/cp-project/src/parser.py',72),
-  ('h3 -> H3OPEN PLAIN H3CLOSE','h3',3,'p_h3','/Users/leapoahead/Code/cp-project/src/parser.py',79),
-  ('hr -> HR','hr',1,'p_hr','/Users/leapoahead/Code/cp-project/src/parser.py',86),
-  ('strong -> STRONGOPEN inline STRONGCLOSE','strong',3,'p_strong','/Users/leapoahead/Code/cp-project/src/parser.py',93),
-  ('italic -> ITALICOPEN PLAIN ITALICCLOSE','italic',3,'p_italic','/Users/leapoahead/Code/cp-project/src/parser.py',100),
-  ('inline-code -> ICOPEN PLAIN ICCLOSE','inline-code',3,'p_inline_code','/Users/leapoahead/Code/cp-project/src/parser.py',107),
+  ('block -> block-list','block',1,'p_block','/Users/leapoahead/Code/cp-project/src/parser.py',30),
+  ('block -> paragraph','block',1,'p_block','/Users/leapoahead/Code/cp-project/src/parser.py',31),
+  ('paragraph -> inline','paragraph',1,'p_paragraph','/Users/leapoahead/Code/cp-project/src/parser.py',40),
+  ('block-list -> list-items','block-list',1,'p_list','/Users/leapoahead/Code/cp-project/src/parser.py',47),
+  ('list-items -> list-item list-items','list-items',2,'p_list_items','/Users/leapoahead/Code/cp-project/src/parser.py',52),
+  ('list-items -> BLOCKDIV','list-items',1,'p_list_items','/Users/leapoahead/Code/cp-project/src/parser.py',53),
+  ('list-item -> LI','list-item',1,'p_list_item','/Users/leapoahead/Code/cp-project/src/parser.py',61),
+  ('inline -> inline PLAIN','inline',2,'p_inline','/Users/leapoahead/Code/cp-project/src/parser.py',72),
+  ('inline -> inline strong','inline',2,'p_inline','/Users/leapoahead/Code/cp-project/src/parser.py',73),
+  ('inline -> inline italic','inline',2,'p_inline','/Users/leapoahead/Code/cp-project/src/parser.py',74),
+  ('inline -> inline inline-code','inline',2,'p_inline','/Users/leapoahead/Code/cp-project/src/parser.py',75),
+  ('inline -> inline named-link','inline',2,'p_inline','/Users/leapoahead/Code/cp-project/src/parser.py',76),
+  ('inline -> inline auto-link','inline',2,'p_inline','/Users/leapoahead/Code/cp-project/src/parser.py',77),
+  ('inline -> <empty>','inline',0,'p_inline_empty','/Users/leapoahead/Code/cp-project/src/parser.py',83),
+  ('h1 -> H1OPEN PLAIN H1CLOSE','h1',3,'p_h1','/Users/leapoahead/Code/cp-project/src/parser.py',91),
+  ('h2 -> H2OPEN PLAIN H2CLOSE','h2',3,'p_h2','/Users/leapoahead/Code/cp-project/src/parser.py',98),
+  ('h3 -> H3OPEN PLAIN H3CLOSE','h3',3,'p_h3','/Users/leapoahead/Code/cp-project/src/parser.py',105),
+  ('hr -> HR','hr',1,'p_hr','/Users/leapoahead/Code/cp-project/src/parser.py',112),
+  ('strong -> STRONGOPEN inline STRONGCLOSE','strong',3,'p_strong','/Users/leapoahead/Code/cp-project/src/parser.py',119),
+  ('italic -> ITALICOPEN PLAIN ITALICCLOSE','italic',3,'p_italic','/Users/leapoahead/Code/cp-project/src/parser.py',126),
+  ('named-link -> LSBRC PLAIN RSBRC LBRC PLAIN RBRC','named-link',6,'p_named_link','/Users/leapoahead/Code/cp-project/src/parser.py',133),
+  ('auto-link -> ALOPEN PLAIN ALCLOSE','auto-link',3,'p_auto_link','/Users/leapoahead/Code/cp-project/src/parser.py',140),
+  ('inline-code -> ICOPEN PLAIN ICCLOSE','inline-code',3,'p_inline_code','/Users/leapoahead/Code/cp-project/src/parser.py',147),
 ]
