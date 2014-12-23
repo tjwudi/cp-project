@@ -42,12 +42,13 @@
             | <Horizontal>
             | <Image>
 
-<Inline> ::= <Strong>
-            | <InlineCode>
-            | <TitledLink>
-            | <UntitledLink>
-            | <Italic>
-            | <Plain>
+<Inline> ::= <Inline> <Strong>
+            | <Inline> <InlineCode>
+            | <Inline> <TitledLink>
+            | <Inline> <UntitledLink>
+            | <Inline> <Italic>
+            | nline>e> <Plain>
+            | ε
 
 <HeadingLevel1> ::= # <Inline>
 <HeadingLevel2> ::= ## <Inline>
