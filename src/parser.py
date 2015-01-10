@@ -195,7 +195,7 @@ def p_error(p):
   print 'Syntax error: %s' % p
 
 parser = yacc.yacc()
-infile = open('../inputs/input1.md', 'r')
+infile = open('../inputs/input3.md', 'r')
 raw_content = infile.read()
 compiled_content = parser.parse(raw_content)
 

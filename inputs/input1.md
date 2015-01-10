@@ -13,8 +13,3 @@ these must be  **comfortable shoes**, i bet you cloud walk all day in shoes _lik
 
 * * *
 
-
-
-
-
-
